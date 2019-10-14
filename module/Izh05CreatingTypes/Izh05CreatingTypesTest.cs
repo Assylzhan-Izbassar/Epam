@@ -14,7 +14,7 @@ namespace Izh05CreatingTypes
         static int[] a2 = new int[] { 2, 3, 4 };
         static int[] a3 = new int[] { 2, 4, 1 };
 
-        [TestCase]/*Я ни смог сделать тесткейс для двумерного массива: оно выдает ошибку CS0182.
+        [TestCase]/*Я ни смог сделать тесткейс для двумерного массива: дебагинг выдает ошибку CS0182.
                     Но я проверил работаспособность кода при помощи Program.cs файла*/
         public int[][] CheckSortBySums(int[][] sourceArray, int n)
         {
