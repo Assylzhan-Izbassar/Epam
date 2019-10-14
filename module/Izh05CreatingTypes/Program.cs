@@ -10,7 +10,7 @@ namespace Izh05CreatingTypes
     {
         static void Main(string[] args)
         {
-            Task2 task = new Task2();
+            /*Task2 task = new Task2();
 
             int[][] arr = new int[][] {
                 new int[] {5,4,3},
@@ -27,7 +27,7 @@ namespace Izh05CreatingTypes
                     Console.Write(arr[i][j] + " ");
                 }
                 Console.WriteLine();
-            }
+            }*/
         }
     }
 }
