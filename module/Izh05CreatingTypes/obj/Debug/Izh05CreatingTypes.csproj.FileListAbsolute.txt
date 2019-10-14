@@ -1,0 +1,10 @@
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\bin\Debug\Izh05CreatingTypes.exe.config
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\bin\Debug\Izh05CreatingTypes.exe
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\bin\Debug\Izh05CreatingTypes.pdb
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\obj\Debug\Izh05CreatingTypes.csprojAssemblyReference.cache
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\obj\Debug\Izh05CreatingTypes.exe
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\obj\Debug\Izh05CreatingTypes.pdb
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\bin\Debug\nunit.framework.dll
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\bin\Debug\nunit.framework.pdb
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\bin\Debug\nunit.framework.xml
+C:\Users\Brother\Desktop\Epam\module\Izh05CreatingTypes\obj\Debug\Izh05CreatingTypes.csproj.CopyComplete
