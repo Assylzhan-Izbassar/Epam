@@ -9,7 +9,7 @@ namespace Izh04BasicCoding
     class Task2
     {
         int maxIndex = 0; int index = 0;
-        public int CheckMaxElementFinding(int[] sourceArray)
+        public int MaxElementFinding(int[] sourceArray)
         {
             if (sourceArray == null)
                 return 0;
@@ -23,7 +23,7 @@ namespace Izh04BasicCoding
             }
             index++;
 
-            return CheckMaxElementFinding(sourceArray);
+            return MaxElementFinding(sourceArray);
         }
     }
 }

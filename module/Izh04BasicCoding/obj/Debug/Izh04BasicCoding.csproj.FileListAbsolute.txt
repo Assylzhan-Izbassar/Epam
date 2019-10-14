@@ -4,3 +4,13 @@ C:\Users\Brother\Desktop\Epam\Izh04BasicCoding\Izh04BasicCoding\bin\Debug\Izh04B
 C:\Users\Brother\Desktop\Epam\Izh04BasicCoding\Izh04BasicCoding\obj\Debug\Izh04BasicCoding.csprojAssemblyReference.cache
 C:\Users\Brother\Desktop\Epam\Izh04BasicCoding\Izh04BasicCoding\obj\Debug\Izh04BasicCoding.exe
 C:\Users\Brother\Desktop\Epam\Izh04BasicCoding\Izh04BasicCoding\obj\Debug\Izh04BasicCoding.pdb
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\bin\Debug\Izh04BasicCoding.exe.config
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\bin\Debug\Izh04BasicCoding.exe
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\bin\Debug\Izh04BasicCoding.pdb
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\bin\Debug\nunit.framework.dll
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\bin\Debug\nunit.framework.pdb
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\bin\Debug\nunit.framework.xml
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\obj\Debug\Izh04BasicCoding.csprojAssemblyReference.cache
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\obj\Debug\Izh04BasicCoding.csproj.CopyComplete
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\obj\Debug\Izh04BasicCoding.exe
+C:\Users\Brother\Desktop\Epam\module\Izh04BasicCoding\obj\Debug\Izh04BasicCoding.pdb
