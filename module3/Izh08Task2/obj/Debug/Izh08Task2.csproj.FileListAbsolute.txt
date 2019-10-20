@@ -1,0 +1,6 @@
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task2\bin\Debug\Izh08Task2.exe.config
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task2\bin\Debug\Izh08Task2.exe
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task2\bin\Debug\Izh08Task2.pdb
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task2\obj\Debug\Izh08Task2.exe
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task2\obj\Debug\Izh08Task2.pdb
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task2\obj\Debug\Izh08Task2.csprojAssemblyReference.cache
