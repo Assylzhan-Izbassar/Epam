@@ -11,6 +11,9 @@ namespace Task
         protected int[,] arr;
         protected int size;
 
+        public SquareMatrix()
+        {
+        }
         public SquareMatrix(int n)
         {
             arr = new int[n, n];
@@ -18,12 +21,16 @@ namespace Task
         }
         protected bool isDiagonalMatrix(int[,] sourceArray)
         {
-            int n = sourceArray.Length;
+            int n = sourceArray.GetLength(0);
             for(int i=0; i < n/2; ++i)
             {
                 for(int j=0; j < n/2; ++j)
                 {
                     if(sourceArray[i,j] != sourceArray[n-i-1,n-j-1])
+                    {
+                        return false;
+                    }
+                    if (sourceArray[i,n-i-1] != sourceArray[n-i-1,i])
                     {
                         return false;
                     }
@@ -33,23 +40,60 @@ namespace Task
         }
         protected bool isSymmetricMatrix(int[,] sourceArray)
         {
-            int n = sourceArray.Length;
-            for (int i = 0; i < n / 2; ++i)
+
+            int[,] transpose = new int[sourceArray.GetLength(0), sourceArray.GetLength(1)];
+            int row = transpose.GetLength(0);
+            int column = transpose.GetLength(1);
+
+            for(int i=0; i < row; ++i)
             {
-                for (int j = 0; j < n / 2; ++j)
+                for(int j=0; j < column; ++j)
                 {
-                    if (sourceArray[i, j] != sourceArray[n - i - 1, n - j - 1])
-                    {
+                    transpose[j, i] = sourceArray[i, j];
+                }
+            }
+
+            for (int i = 0; i < row; ++i)
+            {
+                for (int j = 0; j < column; ++j)
+                {
+                    if (transpose[i, j] != sourceArray[i, j])
                         return false;
-                    }
                 }
             }
             return true;
         }
 
-        /*public int[][] AddMatrices(int[,] A, int[,] B)
+        public int[,] AddMatrices(int[,] A, int[,] B)
         {
-            int[,] C = new int[,]
-        }*/
+            int[,] C = new int[A.GetLength(0), B.GetLength(0)];
+
+            for(int i=0; i < C.GetLength(0); ++i)
+            {
+                for(int j=0; j < C.GetLength(1); ++j)
+                {
+                    C[i, j] = A[i, j] + B[i, j];
+                }
+            }
+
+            return C;
+        }
+        public void SetElement(int x, int i, int j)
+        {
+            arr[i, j] = x;
+        }
+
+        public void SetMatrix(int[,] sourceArray)
+        {
+            arr = new int[sourceArray.GetLength(0), sourceArray.GetLength(1)];
+
+            for(int i=0; i < arr.GetLength(0); ++i)
+            {
+                for(int j=0; j < arr.GetLength(1); ++j)
+                {
+                    arr[i, j] = sourceArray[i, j];
+                }
+            }
+        }
     }
 }

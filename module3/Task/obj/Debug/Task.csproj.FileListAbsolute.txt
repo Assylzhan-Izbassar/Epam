@@ -4,3 +4,7 @@ C:\Users\Brother\Desktop\Epam\module3\Task\bin\Debug\Task.pdb
 C:\Users\Brother\Desktop\Epam\module3\Task\obj\Debug\Task.csprojAssemblyReference.cache
 C:\Users\Brother\Desktop\Epam\module3\Task\obj\Debug\Task.exe
 C:\Users\Brother\Desktop\Epam\module3\Task\obj\Debug\Task.pdb
+C:\Users\Brother\Desktop\Epam\module3\Task\bin\Debug\nunit.framework.dll
+C:\Users\Brother\Desktop\Epam\module3\Task\bin\Debug\nunit.framework.pdb
+C:\Users\Brother\Desktop\Epam\module3\Task\bin\Debug\nunit.framework.xml
+C:\Users\Brother\Desktop\Epam\module3\Task\obj\Debug\Task.csproj.CopyComplete
