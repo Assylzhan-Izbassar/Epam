@@ -1,0 +1,10 @@
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\bin\Debug\Izh08Task1.exe.config
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\bin\Debug\Izh08Task1.exe
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\bin\Debug\Izh08Task1.pdb
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\bin\Debug\nunit.framework.dll
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\bin\Debug\nunit.framework.pdb
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\bin\Debug\nunit.framework.xml
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\obj\Debug\Izh08Task1.csprojAssemblyReference.cache
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\obj\Debug\Izh08Task1.csproj.CopyComplete
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\obj\Debug\Izh08Task1.exe
+C:\Users\Brother\Desktop\Epam\module3\Izh08Task1\obj\Debug\Izh08Task1.pdb

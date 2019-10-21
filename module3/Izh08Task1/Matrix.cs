@@ -30,7 +30,7 @@ namespace Izh08Task1
         }
         private int FindMaxi(int[,] sourceArray, int currentMaxi, int i)
         {
-            for (int j = 0; j < sourceArray.Length; ++j)
+            for (int j = 0; j < sourceArray.GetLength(1); ++j)
             {
                 if (sourceArray[i,j] > currentMaxi)
                 {
@@ -41,7 +41,7 @@ namespace Izh08Task1
         }
         private int FindMini(int[,] sourceArray, int currentMini, int i)
         {
-            for (int j = 0; j < sourceArray.Length; ++j)
+            for (int j = 0; j < sourceArray.GetLength(1); ++j)
             {
                 if (sourceArray[i,j] < currentMini)
                 {
@@ -52,7 +52,7 @@ namespace Izh08Task1
         }
         private int FindSum(int[,] sourceArray, int sum, int i)
         {
-            for (int j = 0; j < sourceArray.Length; ++j)
+            for (int j = 0; j < sourceArray.GetLength(1); ++j)
             {
                 sum += sourceArray[i,j];
             }
@@ -133,9 +133,9 @@ namespace Izh08Task1
         }
         public void SetMatrix(int[,] sourceArray)
         {
-            for(int i=0; i < sourceArray.Length; ++i)
+            for(int i=0; i < sourceArray.GetLength(0); ++i)
             {
-                for(int j=0; j < sourceArray.Length; ++j)
+                for(int j=0; j < sourceArray.GetLength(1); ++j)
                 {
                     arr[i, j] = sourceArray[i, j];
                 }
