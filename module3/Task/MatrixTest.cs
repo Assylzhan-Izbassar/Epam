@@ -35,7 +35,7 @@ namespace Task
         }
 
         [TestCase]
-        public void checkAdd()
+        public void CheckAdd()
         {
             int[,] arr = new int[,] { { 2, 3, 5 },
                                       { 3, 5, 8 },
