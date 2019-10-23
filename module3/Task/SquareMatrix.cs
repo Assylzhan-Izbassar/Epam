@@ -19,7 +19,7 @@ namespace Task
             arr = new int[n, n];
             size = n;
         }
-        protected bool isDiagonalMatrix(int[,] sourceArray)
+        protected bool IsDiagonalMatrix(int[,] sourceArray)
         {
             int n = sourceArray.GetLength(0);
             for(int i=0; i < n/2; ++i)
@@ -38,7 +38,7 @@ namespace Task
             }
             return true;
         }
-        protected bool isSymmetricMatrix(int[,] sourceArray)
+        protected bool IsSymmetricMatrix(int[,] sourceArray)
         {
 
             int[,] transpose = new int[sourceArray.GetLength(0), sourceArray.GetLength(1)];
@@ -83,7 +83,7 @@ namespace Task
             arr[i, j] = x;
         }
 
-        public void SetMatrix(int[,] sourceArray)
+        public virtual void SetMatrix(int[,] sourceArray)
         {
             arr = new int[sourceArray.GetLength(0), sourceArray.GetLength(1)];
 

@@ -76,7 +76,7 @@ namespace Izh08Task1
                 }
             }
         }
-        public int[,] sortByMini()
+        public int[,] SortByMini()
         {
             int[] temp = new int[size];
 
@@ -93,7 +93,7 @@ namespace Izh08Task1
 
             return arr;
         }
-        public int[,] sortByMaxi()
+        public int[,] SortByMaxi()
         {
             int[] temp = new int[size];
 
@@ -110,7 +110,7 @@ namespace Izh08Task1
 
             return arr;
         }
-        public int[,] sortBySum()
+        public int[,] SortBySum()
         {
             int[] temp = new int[size];
 

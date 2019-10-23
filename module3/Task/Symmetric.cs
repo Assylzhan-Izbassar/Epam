@@ -16,17 +16,17 @@ namespace Task
             arr = new int[n, n];
             size = n;
         }
-        public void setMatrix(int[,] sourceArray)
+        public override void SetMatrix(int[,] sourceArray)
         {
-            if(isSymmetricMatrix(sourceArray))
+            if(IsSymmetricMatrix(sourceArray))
             {
-                SetMatrix(sourceArray);
+                base.SetMatrix(sourceArray);
             }
         }
 
-        public bool checkSymmetric(int[,] sourceArray)
+        public bool CheckSymmetric(int[,] sourceArray)
         {
-            bool res = isSymmetricMatrix(sourceArray);
+            bool res = IsSymmetricMatrix(sourceArray);
             return res;
         }
     }

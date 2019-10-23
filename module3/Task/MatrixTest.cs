@@ -18,7 +18,7 @@ namespace Task
                                       { 5, 8, 5 } };
             bool result = true;
             Symmetric symmetric = new Symmetric(3);
-            bool check = symmetric.checkSymmetric(arr);
+            bool check = symmetric.CheckSymmetric(arr);
             Assert.AreEqual(check, result);
         }
 
@@ -30,7 +30,7 @@ namespace Task
                                       { 3, 8, 5 } };
             bool result = false;
             DiagonalMatrix dm = new DiagonalMatrix(3);
-            bool check = dm.checkDiagonal(arr);
+            bool check = dm.CheckDiagonal(arr);
             Assert.AreEqual(check, result);
         }
 

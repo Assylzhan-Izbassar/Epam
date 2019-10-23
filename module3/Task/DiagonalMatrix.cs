@@ -15,17 +15,17 @@ namespace Task
             arr = new int[n,n];
             size = n;
         }
-        public void setMatrix(int[,] sourceArray)
+        public override void SetMatrix(int[,] sourceArray)
         {
-            if (isDiagonalMatrix(sourceArray))
+            if (IsDiagonalMatrix(sourceArray))
             {
-                SetMatrix(sourceArray);
+                base.SetMatrix(sourceArray);
             }
         }
 
-        public bool checkDiagonal(int[,] sourceArray)
+        public bool CheckDiagonal(int[,] sourceArray)
         {
-            bool res = isDiagonalMatrix(sourceArray);
+            bool res = IsDiagonalMatrix(sourceArray);
             return res;
         }
     }

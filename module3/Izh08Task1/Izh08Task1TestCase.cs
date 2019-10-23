@@ -19,7 +19,7 @@ namespace Izh08Task1
 
             matrix.SetMatrix(arr);
 
-            matrix.sortByMini();
+            matrix.SortByMini();
 
             Assert.AreEqual(matrix.getMatrix(), ans);
         }
@@ -33,7 +33,7 @@ namespace Izh08Task1
 
             matrix.SetMatrix(arr);
 
-            matrix.sortByMaxi();
+            matrix.SortByMaxi();
 
             Assert.AreEqual(matrix.getMatrix(), ans);
         }
@@ -46,7 +46,7 @@ namespace Izh08Task1
 
             matrix.SetMatrix(arr);
 
-            matrix.sortBySum();
+            matrix.SortBySum();
 
             Assert.AreEqual(matrix.getMatrix(), ans);
         }
