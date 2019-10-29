@@ -84,8 +84,7 @@ namespace Izh08Task1
 
             for (int i = 0; i < size; ++i)
             {
-                mini = arr[i,0];
-                mini = FindMini(arr, mini, i);
+                mini = FindMini(arr, arr[i, 0], i);
                 temp[i] = mini;
             }
             //BubbleSort for 2dArray
@@ -101,8 +100,7 @@ namespace Izh08Task1
 
             for (int i = 0; i < size; ++i)
             {
-                maxi = arr[i, 0];
-                maxi = FindMaxi(arr, maxi, i);
+                maxi = FindMaxi(arr, arr[i, 0], i);
                 temp[i] = maxi;
             }
             //BubbleSort for 2dArray
@@ -118,8 +116,7 @@ namespace Izh08Task1
 
             for (int i = 0; i < size; ++i)
             {
-                sum = 0;
-                sum = FindSum(arr, sum, i);
+                sum = FindSum(arr, 0, i);
                 temp[i] = sum;
             }
             //BubbleSort for 2dArray

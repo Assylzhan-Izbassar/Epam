@@ -1,0 +1,10 @@
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\bin\Debug\Izh09FrameworkFundamentals.exe.config
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\bin\Debug\Izh09FrameworkFundamentals.exe
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\bin\Debug\Izh09FrameworkFundamentals.pdb
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\bin\Debug\nunit.framework.dll
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\bin\Debug\nunit.framework.pdb
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\bin\Debug\nunit.framework.xml
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\obj\Debug\Izh09FrameworkFundamentals.csprojAssemblyReference.cache
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\obj\Debug\Izh09FrameworkFundamentals.csproj.CopyComplete
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\obj\Debug\Izh09FrameworkFundamentals.exe
+C:\Users\Brother\Desktop\Epam\module4\Izh09FrameworkFundamentals\obj\Debug\Izh09FrameworkFundamentals.pdb

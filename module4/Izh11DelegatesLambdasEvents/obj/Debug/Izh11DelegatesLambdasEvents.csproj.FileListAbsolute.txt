@@ -1,0 +1,6 @@
+C:\Users\Brother\Desktop\Epam\module4\Izh11DelegatesLambdasEvents\bin\Debug\Izh11DelegatesLambdasEvents.exe.config
+C:\Users\Brother\Desktop\Epam\module4\Izh11DelegatesLambdasEvents\bin\Debug\Izh11DelegatesLambdasEvents.exe
+C:\Users\Brother\Desktop\Epam\module4\Izh11DelegatesLambdasEvents\bin\Debug\Izh11DelegatesLambdasEvents.pdb
+C:\Users\Brother\Desktop\Epam\module4\Izh11DelegatesLambdasEvents\obj\Debug\Izh11DelegatesLambdasEvents.csprojAssemblyReference.cache
+C:\Users\Brother\Desktop\Epam\module4\Izh11DelegatesLambdasEvents\obj\Debug\Izh11DelegatesLambdasEvents.exe
+C:\Users\Brother\Desktop\Epam\module4\Izh11DelegatesLambdasEvents\obj\Debug\Izh11DelegatesLambdasEvents.pdb
