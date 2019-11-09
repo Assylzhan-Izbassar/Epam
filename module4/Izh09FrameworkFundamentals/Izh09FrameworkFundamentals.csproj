@@ -58,6 +58,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task2.cs" />
+    <Compile Include="Task3.cs" />
+    <Compile Include="Task5.cs" />
     <Compile Include="TestCustomer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,6 @@
+C:\Users\Brother\Desktop\Epam\module4\Izh15StreamsAndIO\bin\Debug\Izh15StreamsAndIO.exe.config
+C:\Users\Brother\Desktop\Epam\module4\Izh15StreamsAndIO\bin\Debug\Izh15StreamsAndIO.exe
+C:\Users\Brother\Desktop\Epam\module4\Izh15StreamsAndIO\bin\Debug\Izh15StreamsAndIO.pdb
+C:\Users\Brother\Desktop\Epam\module4\Izh15StreamsAndIO\obj\Debug\Izh15StreamsAndIO.csprojAssemblyReference.cache
+C:\Users\Brother\Desktop\Epam\module4\Izh15StreamsAndIO\obj\Debug\Izh15StreamsAndIO.exe
+C:\Users\Brother\Desktop\Epam\module4\Izh15StreamsAndIO\obj\Debug\Izh15StreamsAndIO.pdb
