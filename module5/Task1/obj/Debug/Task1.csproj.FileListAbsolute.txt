@@ -1,0 +1,12 @@
+C:\Users\Brother\source\repos\IzhForAsync\Task1\bin\Debug\Task1.exe.config
+C:\Users\Brother\source\repos\IzhForAsync\Task1\bin\Debug\Task1.exe
+C:\Users\Brother\source\repos\IzhForAsync\Task1\bin\Debug\Task1.pdb
+C:\Users\Brother\source\repos\IzhForAsync\Task1\obj\Debug\Task1.csprojAssemblyReference.cache
+C:\Users\Brother\source\repos\IzhForAsync\Task1\obj\Debug\Task1.exe
+C:\Users\Brother\source\repos\IzhForAsync\Task1\obj\Debug\Task1.pdb
+C:\Users\Brother\Desktop\Epam\module5\Task1\bin\Debug\Task1.exe.config
+C:\Users\Brother\Desktop\Epam\module5\Task1\bin\Debug\Task1.exe
+C:\Users\Brother\Desktop\Epam\module5\Task1\bin\Debug\Task1.pdb
+C:\Users\Brother\Desktop\Epam\module5\Task1\obj\Debug\Task1.csprojAssemblyReference.cache
+C:\Users\Brother\Desktop\Epam\module5\Task1\obj\Debug\Task1.exe
+C:\Users\Brother\Desktop\Epam\module5\Task1\obj\Debug\Task1.pdb
