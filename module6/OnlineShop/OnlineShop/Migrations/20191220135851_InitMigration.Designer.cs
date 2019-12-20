@@ -9,8 +9,8 @@ using OnlineShop.DAL;
 namespace OnlineShop.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20191217132437_CreateOnlineShop")]
-    partial class CreateOnlineShop
+    [Migration("20191220135851_InitMigration")]
+    partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,72 +22,114 @@ namespace OnlineShop.Migrations
 
             modelBuilder.Entity("OnlineShop.DAL.Model.Card", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.HasKey("CardId");
 
                     b.ToTable("Cards");
                 });
 
             modelBuilder.Entity("OnlineShop.DAL.Model.Comment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.HasKey("CommentId");
 
                     b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("OnlineShop.DAL.Model.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Zip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerId");
 
                     b.ToTable("Costomers");
                 });
 
             modelBuilder.Entity("OnlineShop.DAL.Model.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToStreet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToZip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("OnlineShop.DAL.Model.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("OnlineShop.DAL.Model.Seller", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SellerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SellerId");
 
                     b.ToTable("Sellers");
                 });

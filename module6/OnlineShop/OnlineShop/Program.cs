@@ -1,4 +1,5 @@
 ﻿using OnlineShop.DAL;
+using OnlineShop.DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace OnlineShop
         {
             using (var context = new BlogDbContext())
             {
-                // do stuff
             }
         }
     }

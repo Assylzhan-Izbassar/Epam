@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Database, Version=1.0.6002.29377, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Database.2.5.0\lib\Database.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -96,6 +99,15 @@
     <Reference Include="Microsoft.Identity.Client, Version=3.0.8.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.3.0.8\lib\net45\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -141,16 +153,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\BlogDbContext.cs" />
-    <Compile Include="DAL\Model\BaseData.cs" />
     <Compile Include="DAL\Model\Card.cs" />
     <Compile Include="DAL\Model\Comment.cs" />
     <Compile Include="DAL\Model\Customer.cs" />
     <Compile Include="DAL\Model\Order.cs" />
     <Compile Include="DAL\Model\Product.cs" />
     <Compile Include="DAL\Model\Seller.cs" />
-    <Compile Include="Migrations\20191217132437_CreateOnlineShop.cs" />
-    <Compile Include="Migrations\20191217132437_CreateOnlineShop.designer.cs">
-      <DependentUpon>20191217132437_CreateOnlineShop.cs</DependentUpon>
+    <Compile Include="Migrations\20191220135851_InitMigration.cs" />
+    <Compile Include="Migrations\20191220135851_InitMigration.designer.cs">
+      <DependentUpon>20191220135851_InitMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20191220145945_UpdatedTables.cs" />
+    <Compile Include="Migrations\20191220145945_UpdatedTables.designer.cs">
+      <DependentUpon>20191220145945_UpdatedTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20191220150633_UpdatedProductTable.cs" />
+    <Compile Include="Migrations\20191220150633_UpdatedProductTable.designer.cs">
+      <DependentUpon>20191220150633_UpdatedProductTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BlogDbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />

@@ -1,10 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.Text;
 
 namespace OnlineShop.DAL.Model
 {
-    public class Card: BaseData
+    public class Card
     {
+        public int CardID { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Brand { get; set; }
+        public string CardNumber { get; set; }
+        public DateTime ExpirationDate { get; set; }
     }
 }

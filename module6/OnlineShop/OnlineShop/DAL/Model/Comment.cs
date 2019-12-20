@@ -4,7 +4,10 @@ using System.Text;
 
 namespace OnlineShop.DAL.Model
 {
-    public class Comment : BaseData
+    public class Comment
     {
+        public int CommentID { get; set; }
+        public string Summary { get; set; }
+        public DateTime WroteTime { get; set; }
     }
 }
