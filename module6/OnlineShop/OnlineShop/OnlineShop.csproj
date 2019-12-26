@@ -171,6 +171,14 @@
     <Compile Include="Migrations\20191220150633_UpdatedProductTable.designer.cs">
       <DependentUpon>20191220150633_UpdatedProductTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20191223152928_UpdatedCommentTable.cs" />
+    <Compile Include="Migrations\20191223152928_UpdatedCommentTable.designer.cs">
+      <DependentUpon>20191223152928_UpdatedCommentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20191223153147_UpdatedCommentTableDemo.cs" />
+    <Compile Include="Migrations\20191223153147_UpdatedCommentTableDemo.designer.cs">
+      <DependentUpon>20191223153147_UpdatedCommentTableDemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BlogDbContextModelSnapshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
