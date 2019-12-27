@@ -10,6 +10,8 @@ namespace DAL
         IEnumerable<Product> GetProducts();
         Product GetProductByID(int productID);
         bool InsertProduct(Product product);
+        bool UpdateProduct(Product product);
+        bool DeleteProduct(int productID);
         void Save();
     }
 }

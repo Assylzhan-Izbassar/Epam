@@ -1,8 +1,6 @@
 ﻿using DAL.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DAL
 {
@@ -54,6 +52,27 @@ namespace DAL
         public void Save()
         {
             _shopDbContext.SaveChanges();
+        }
+
+        public bool UpdateProduct(Product product)
+        {
+            if(product != null)
+            {
+                _shopDbContext.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteProduct(int productID)
+        {
+            Product product = _shopDbContext.Products.Find(productID);
+            if(product != null)
+            {
+                _shopDbContext.Products.Remove(product);
+                return true;
+            }
+            return false;
         }
     }
 }

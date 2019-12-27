@@ -25,5 +25,10 @@ namespace DAL
         {
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=OnlineShopMVC;Trusted_Connection=True;");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().HasMany(x => x.Orders).WithOne(x => x.Customer);
+            modelBuilder.Entity<Product>().HasMany(x => x.Orders).WithOne(x => x.Product);
+        }
     }
 }
