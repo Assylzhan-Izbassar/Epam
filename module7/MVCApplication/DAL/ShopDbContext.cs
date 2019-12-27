@@ -20,5 +20,10 @@ namespace DAL
         public DbSet<Order> Orders { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Comment> Comments { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=OnlineShopMVC;Trusted_Connection=True;");
+        }
     }
 }

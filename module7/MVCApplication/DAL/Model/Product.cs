@@ -9,7 +9,7 @@ namespace DAL.Model
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public string Quantity { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public DateTime DateOfProduction { get; set; }
         public int UnitsInStock { get; set; }
         public int UnitsOnOrder { get; set; }
