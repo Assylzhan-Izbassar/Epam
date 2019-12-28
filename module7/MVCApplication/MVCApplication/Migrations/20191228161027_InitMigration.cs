@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DAL.Migrations
+namespace MVCApplication.Migrations
 {
     public partial class InitMigration : Migration
     {
@@ -30,7 +30,7 @@ namespace DAL.Migrations
                 {
                     CustomerID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 30, nullable: false),
                     Surname = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
@@ -50,7 +50,7 @@ namespace DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(nullable: true),
                     Quantity = table.Column<string>(nullable: true),
-                    Price = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     DateOfProduction = table.Column<DateTime>(nullable: false),
                     UnitsInStock = table.Column<int>(nullable: false),
                     UnitsOnOrder = table.Column<int>(nullable: false)
@@ -76,6 +76,31 @@ namespace DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sellers", x => x.SellerID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<int>(nullable: false),
+                    CustomerID = table.Column<int>(nullable: false),
+                    CustomerName = table.Column<string>(nullable: true),
+                    ToState = table.Column<string>(nullable: true),
+                    ToCity = table.Column<string>(nullable: true),
+                    ToStreet = table.Column<string>(nullable: true),
+                    ToZip = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderID);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,30 +132,25 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "ProductOrders",
                 columns: table => new
                 {
-                    OrderID = table.Column<int>(nullable: false)
+                    ProductOrderID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductID = table.Column<int>(nullable: false),
-                    CustomerID = table.Column<int>(nullable: false),
-                    CustomerName = table.Column<string>(nullable: true),
-                    ToState = table.Column<string>(nullable: true),
-                    ToCity = table.Column<string>(nullable: true),
-                    ToStreet = table.Column<string>(nullable: true),
-                    ToZip = table.Column<string>(nullable: true)
+                    OrderID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderID);
+                    table.PrimaryKey("PK_ProductOrders", x => x.ProductOrderID);
                     table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_ProductOrders_Orders_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Orders",
+                        principalColumn: "OrderID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Orders_Products_ProductID",
+                        name: "FK_ProductOrders_Products_ProductID",
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "ProductID",
@@ -153,8 +173,13 @@ namespace DAL.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ProductID",
-                table: "Orders",
+                name: "IX_ProductOrders_OrderID",
+                table: "ProductOrders",
+                column: "OrderID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOrders_ProductID",
+                table: "ProductOrders",
                 column: "ProductID");
         }
 
@@ -167,16 +192,19 @@ namespace DAL.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "ProductOrders");
 
             migrationBuilder.DropTable(
                 name: "Sellers");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }

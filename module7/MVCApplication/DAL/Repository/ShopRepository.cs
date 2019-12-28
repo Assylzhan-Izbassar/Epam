@@ -1,6 +1,7 @@
 ﻿using DAL.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DAL
 {
@@ -44,6 +45,11 @@ namespace DAL
             if(product != null)
             {
                 _shopDbContext.Products.Add(product);
+                var productOrder = new ProductOrder()
+                {
+                    Product = product
+                };
+                _shopDbContext.ProductOrders.Add(productOrder);
                 return true;
             }
             return false;
@@ -70,6 +76,90 @@ namespace DAL
             if(product != null)
             {
                 _shopDbContext.Products.Remove(product);
+                return true;
+            }
+            return false;
+        }
+
+        public IEnumerable<Order> GetOrders()
+        {
+            return _shopDbContext.Orders;
+        }
+
+        public Order GetOrderByID(int orderID)
+        {
+            return _shopDbContext.Orders.Find(orderID);
+        }
+
+        public bool InsertOrder(Order order)
+        {
+            if(order != null)
+            {
+                var customer = _shopDbContext.Customers.Where(x => x.CustomerID >= 1).Take(1);
+                var productOrder = _shopDbContext.ProductOrders.Where(x => x.OrderID == null).Take(2).ToList();
+                var orderWithID = new Order()
+                {
+                    Products = productOrder,
+                    Customer = customer.FirstOrDefault(),
+                    CustomerName = order.CustomerName,
+                    ToCity = order.ToCity,
+                    ToState = order.ToState
+                };
+
+                _shopDbContext.Orders.Add(orderWithID);
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteOrder(int orderID)
+        {
+            Order order = _shopDbContext.Orders.Find(orderID);
+            if (order != null)
+            {
+                _shopDbContext.Orders.Remove(order);
+                return true;
+            }
+            return false;
+        }
+
+        public IEnumerable<Customer> GetCustomers()
+        {
+            return _shopDbContext.Customers;
+        }
+
+        public Customer GetCustomerByID(int customerID)
+        {
+            var customer = _shopDbContext.Customers.Find(customerID);
+            return customer;
+        }
+
+        public bool InsertCustomer(Customer customer)
+        {
+            if(customer != null)
+            {
+                _shopDbContext.Customers.Add(customer);
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateCustomer(Customer customer)
+        {
+            if (customer != null)
+            {
+                _shopDbContext.Entry(customer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteCustomer(int customerID)
+        {
+            var customer = _shopDbContext.Customers.Find(customerID);
+            if(customer != null)
+            {
+                _shopDbContext.Customers.Remove(customer);
                 return true;
             }
             return false;

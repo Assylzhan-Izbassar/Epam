@@ -7,9 +7,6 @@ namespace DAL.Model
     public class Order
     {
         public int OrderID { get; set; }
-        public Customer Customer { get; set; }
-        public int ProductID { get; set; }
-        public Product Product { get; set; }
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
         DateTime ShipDate { get; set; }
@@ -18,5 +15,7 @@ namespace DAL.Model
         public string ToStreet { get; set; }
         public string ToZip { get; set; }
 
+        public virtual ICollection<ProductOrder> Products { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

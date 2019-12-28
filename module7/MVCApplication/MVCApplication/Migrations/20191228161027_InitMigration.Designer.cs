@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DAL.Migrations
+namespace MVCApplication.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20191226194343_InitMigration")]
+    [Migration("20191228161027_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,9 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -138,8 +140,6 @@ namespace DAL.Migrations
 
                     b.HasIndex("CustomerID");
 
-                    b.HasIndex("ProductID");
-
                     b.ToTable("Orders");
                 });
 
@@ -153,8 +153,8 @@ namespace DAL.Migrations
                     b.Property<DateTime>("DateOfProduction")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
@@ -171,6 +171,28 @@ namespace DAL.Migrations
                     b.HasKey("ProductID");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("DAL.Model.ProductOrder", b =>
+                {
+                    b.Property<int>("ProductOrderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductOrderID");
+
+                    b.HasIndex("OrderID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("ProductOrders");
                 });
 
             modelBuilder.Entity("DAL.Model.Seller", b =>
@@ -206,7 +228,7 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Model.Comment", b =>
                 {
                     b.HasOne("DAL.Model.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -225,6 +247,13 @@ namespace DAL.Migrations
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DAL.Model.ProductOrder", b =>
+                {
+                    b.HasOne("DAL.Model.Order", "Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderID");
 
                     b.HasOne("DAL.Model.Product", "Product")
                         .WithMany("Orders")

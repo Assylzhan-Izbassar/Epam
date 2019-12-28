@@ -18,17 +18,21 @@ namespace DAL
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ProductOrder> ProductOrders { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=OnlineShopMVC;Trusted_Connection=True;");
+            string connectionString = @"Server=.\SQLEXPRESS;Database=OnlineShopMVC;Trusted_Connection=True;";
+            optionsBuilder.UseSqlServer(connectionString, b => b.MigrationsAssembly("MVCApplication"));
+            optionsBuilder.UseLazyLoadingProxies();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().HasMany(x => x.Orders).WithOne(x => x.Customer);
             modelBuilder.Entity<Product>().HasMany(x => x.Orders).WithOne(x => x.Product);
+            modelBuilder.Entity<Order>().HasMany(x => x.Products).WithOne(x => x.Order);
         }
     }
 }

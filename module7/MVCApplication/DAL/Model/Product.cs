@@ -14,6 +14,6 @@ namespace DAL.Model
         public int UnitsInStock { get; set; }
         public int UnitsOnOrder { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<ProductOrder> Orders { get; set; }
     }
 }
