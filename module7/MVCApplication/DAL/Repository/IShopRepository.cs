@@ -17,10 +17,12 @@ namespace DAL
         Order GetOrderByID(int orderID);
         bool InsertOrder(Order order);
         bool DeleteOrder(int orderID);
+        bool UpdateOrder(Order order);
         IEnumerable<Customer> GetCustomers();
         Customer GetCustomerByID(int customerID);
         bool InsertCustomer(Customer customer);
         bool UpdateCustomer(Customer customer);
         bool DeleteCustomer(int customerID);
+        IEnumerable<ProductOrder> GetProductOrder();
     }
 }

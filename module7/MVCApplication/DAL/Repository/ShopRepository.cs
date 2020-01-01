@@ -95,18 +95,7 @@ namespace DAL
         {
             if(order != null)
             {
-                var customer = _shopDbContext.Customers.Where(x => x.CustomerID >= 1).Take(1);
-                var productOrder = _shopDbContext.ProductOrders.Where(x => x.OrderID == null).Take(2).ToList();
-                var orderWithID = new Order()
-                {
-                    Products = productOrder,
-                    Customer = customer.FirstOrDefault(),
-                    CustomerName = order.CustomerName,
-                    ToCity = order.ToCity,
-                    ToState = order.ToState
-                };
-
-                _shopDbContext.Orders.Add(orderWithID);
+                _shopDbContext.Orders.Add(order);
                 return true;
             }
             return false;
@@ -160,6 +149,21 @@ namespace DAL
             if(customer != null)
             {
                 _shopDbContext.Customers.Remove(customer);
+                return true;
+            }
+            return false;
+        }
+
+        public IEnumerable<ProductOrder> GetProductOrder()
+        {
+            return _shopDbContext.ProductOrders;
+        }
+
+        public bool UpdateOrder(Order order)
+        {
+            if (order != null)
+            {
+                _shopDbContext.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 return true;
             }
             return false;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using DAL;
 using DAL.Model;
 using System.Data;
+using DAL.ViewModel;
 
 namespace MVCApplication.Controllers
 {
@@ -30,7 +31,7 @@ namespace MVCApplication.Controllers
             return View(product);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int customerId)
         {
             return View(new Product());
         }
