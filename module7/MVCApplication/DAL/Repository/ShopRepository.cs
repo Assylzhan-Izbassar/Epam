@@ -95,6 +95,16 @@ namespace DAL
         {
             if(order != null)
             {
+                Product product = _shopDbContext.Products.Find(order.ProductID);
+                product.UnitsOnOrder = product.UnitsOnOrder + 1;
+                foreach(ProductOrder po in _shopDbContext.ProductOrders)
+                {
+                    if(po.ProductID == order.ProductID)
+                    {
+                        po.Order = order;
+                        break;
+                    }
+                }
                 _shopDbContext.Orders.Add(order);
                 return true;
             }

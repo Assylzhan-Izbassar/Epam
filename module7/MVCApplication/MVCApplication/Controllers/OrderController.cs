@@ -26,6 +26,12 @@ namespace MVCApplication.Controllers
             return View(orders);
         }
 
+        public ActionResult Details(int id)
+        {
+            Order order = repository.GetOrderByID(id);
+            return View(order);
+        }
+
         public ActionResult Create()
         {
             List<CustomerModel> customers = repository.GetCustomers()

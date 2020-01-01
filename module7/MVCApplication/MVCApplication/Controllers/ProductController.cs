@@ -25,6 +25,7 @@ namespace MVCApplication.Controllers
                            select product;
             return View(products);
         }
+
         public ViewResult Details(int id)
         {
             Product product = repository.GetProductByID(id);
@@ -53,6 +54,7 @@ namespace MVCApplication.Controllers
             }
             return View(product);
         }
+
         public ActionResult Edit(int id)
         {
             Product product = repository.GetProductByID(id);
@@ -76,6 +78,7 @@ namespace MVCApplication.Controllers
             }
             return View(product);
         }
+
         public ActionResult Delete(int id, bool? saveChangesError)
         {
             if (saveChangesError.GetValueOrDefault())
