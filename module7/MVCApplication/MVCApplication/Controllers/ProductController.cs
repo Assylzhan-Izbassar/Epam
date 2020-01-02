@@ -7,15 +7,22 @@ using DAL;
 using DAL.Model;
 using System.Data;
 using DAL.ViewModel;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCApplication.Controllers
 {
     public class ProductController : Controller
     {
         private IShopRepository repository;
+        [Obsolete]
+        private readonly IHostingEnvironment hosting;
 
-        public ProductController()
+        [Obsolete]
+        public ProductController(IHostingEnvironment hosting)
         {
+            this.hosting = hosting;
             repository = new ShopRepository(new ShopDbContext());
         }
 
@@ -37,7 +44,7 @@ namespace MVCApplication.Controllers
             return View(new Product());
         }
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, IFormFile picture)
         {
             try
             {
@@ -100,6 +107,18 @@ namespace MVCApplication.Controllers
             catch (DataException)
             {
                 return RedirectToAction("Delete", new { id, V = true });
+            }
+            return RedirectToAction("Index");
+        }
+
+        [Obsolete]
+        public IActionResult ShowFields(IFormFile picture)
+        {
+            if(picture != null)
+            {
+                var fileName = Path.Combine(hosting.WebRootPath + "/img", Path.GetFileName(picture.FileName));
+                picture.CopyTo(new FileStream(fileName, FileMode.Create));
+                ViewData["imgPath"] = fileName;
             }
             return RedirectToAction("Index");
         }

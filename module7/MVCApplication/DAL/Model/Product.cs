@@ -13,6 +13,7 @@ namespace DAL.Model
         public DateTime DateOfProduction { get; set; }
         public int UnitsInStock { get; set; }
         public int UnitsOnOrder { get; set; }
+        public string ImageUrl { get; set; }
 
         public virtual ICollection<ProductOrder> Orders { get; set; }
     }

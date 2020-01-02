@@ -73,6 +73,14 @@ namespace DAL
         public bool DeleteProduct(int productID)
         {
             Product product = _shopDbContext.Products.Find(productID);
+            foreach(ProductOrder order in _shopDbContext.ProductOrders)
+            {
+                if (productID == order.ProductID)
+                {
+                    _shopDbContext.ProductOrders.Remove(order);
+                    break;
+                }
+            }
             if(product != null)
             {
                 _shopDbContext.Products.Remove(product);
@@ -96,17 +104,23 @@ namespace DAL
             if(order != null)
             {
                 Product product = _shopDbContext.Products.Find(order.ProductID);
-                product.UnitsOnOrder = product.UnitsOnOrder + 1;
-                foreach(ProductOrder po in _shopDbContext.ProductOrders)
+
+                if(product.UnitsInStock > 0)
                 {
-                    if(po.ProductID == order.ProductID)
+                    product.UnitsOnOrder += 1;
+                    product.UnitsInStock -= 1;
+
+                    foreach (ProductOrder po in _shopDbContext.ProductOrders)
                     {
-                        po.Order = order;
-                        break;
+                        if (po.ProductID == order.ProductID)
+                        {
+                            po.Order = order;
+                            break;
+                        }
                     }
+                    _shopDbContext.Orders.Add(order);
+                    return true;
                 }
-                _shopDbContext.Orders.Add(order);
-                return true;
             }
             return false;
         }
