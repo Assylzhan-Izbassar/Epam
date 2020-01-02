@@ -9,7 +9,6 @@ using System.Data;
 using DAL.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using Microsoft.AspNetCore.Http;
 
 namespace MVCApplication.Controllers
 {
@@ -39,17 +38,38 @@ namespace MVCApplication.Controllers
             return View(product);
         }
 
-        public ActionResult Create(int customerId)
+        public ActionResult Create()
         {
-            return View(new Product());
+            return View(new ProductModel());
         }
         [HttpPost]
-        public ActionResult Create(Product product, IFormFile picture)
+        [Obsolete]
+        public ActionResult Create(ProductModel productModel)
         {
+            Product product = null;
+            string fileName = null;
+            string path = null;
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if(productModel.Picture != null)
+                    {
+                        fileName = Path
+                            .Combine(hosting.WebRootPath, "img", Path.GetFileName(productModel.Picture.FileName));
+                        productModel.Picture.CopyTo(new FileStream(fileName, FileMode.Create));
+                        path = "/img/" + Path.GetFileName(productModel.Picture.FileName);
+                    }
+                    product = new Product() {
+                        ProductName = productModel.ProductName,
+                        Quantity = productModel.Quantity,
+                        Price = productModel.Price,
+                        DateOfProduction = productModel.DateOfProduction,
+                        UnitsInStock = productModel.UnitsInStock,
+                        UnitsOnOrder = productModel.UnitsOnOrder,
+                        ImageUrl = path
+                    };
+
                     repository.InsertProduct(product);
                     repository.Save();
                     return RedirectToAction("Index");
@@ -107,18 +127,6 @@ namespace MVCApplication.Controllers
             catch (DataException)
             {
                 return RedirectToAction("Delete", new { id, V = true });
-            }
-            return RedirectToAction("Index");
-        }
-
-        [Obsolete]
-        public IActionResult ShowFields(IFormFile picture)
-        {
-            if(picture != null)
-            {
-                var fileName = Path.Combine(hosting.WebRootPath + "/img", Path.GetFileName(picture.FileName));
-                picture.CopyTo(new FileStream(fileName, FileMode.Create));
-                ViewData["imgPath"] = fileName;
             }
             return RedirectToAction("Index");
         }

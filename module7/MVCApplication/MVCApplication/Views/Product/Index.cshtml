@@ -59,8 +59,7 @@
                 @Html.DisplayFor(modelItem => item.UnitsOnOrder)
             </td>
             <td>
-                <img src ="@item.ImageUrl"/>
-                <label>@ViewData["imgPath"]</label>
+                <img style="width:auto; height:75px" src ="@item.ImageUrl" asp-append-version="true"/>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
