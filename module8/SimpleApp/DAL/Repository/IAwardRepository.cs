@@ -1,11 +1,10 @@
-﻿using DAL.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using DAL.Models;
 
 namespace DAL.Repository
 {
-    interface IAwardRepository:IDisposable
+    public interface IAwardRepository:IDisposable
     {
         IEnumerable<User> GetUsers();
         User GetUserByID(int userID);

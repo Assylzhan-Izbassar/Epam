@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL.Models
+namespace DAL.ViewModel
 {
-    public class User
+    public class UserView
     {
-        public int UserID { get; set; }
         public string Name { get; set; }
         public DateTime Birthdate { get; set; }
         public int Age { get; set; }
-        public string PhotoPath { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }

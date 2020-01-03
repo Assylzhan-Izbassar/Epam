@@ -1,12 +1,11 @@
-﻿using DAL.Models;
-using DAL.Staff;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using DAL.Models;
+using DAL.Staff;
 
 namespace DAL.Repository
 {
-    class AwardRepository : IAwardRepository
+    public class AwardRepository : IAwardRepository
     {
         private AwardDbContext _awardDbContext;
         private bool Disposed = false;
