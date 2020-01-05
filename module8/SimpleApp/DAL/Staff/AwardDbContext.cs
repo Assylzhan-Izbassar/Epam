@@ -18,6 +18,7 @@ namespace DAL.Staff
 
         public DbSet<User> Users { get; set; }
         public DbSet<Award> Awards { get; set; }
+        public DbSet<UserAward> UserAwards { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

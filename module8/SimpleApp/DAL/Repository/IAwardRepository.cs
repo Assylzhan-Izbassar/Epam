@@ -19,5 +19,8 @@ namespace DAL.Repository
         bool AddAward(Award award);
         bool UpdateAward(Award award);
         bool DeleteAward(int awardID);
+
+        IEnumerable<UserAward> GetUserAwards();
+        bool AddUserAward(UserAward userAward);
     }
 }

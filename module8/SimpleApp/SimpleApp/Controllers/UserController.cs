@@ -40,6 +40,7 @@ namespace SimpleApp.Controllers
         public ViewResult Awards(int id)
         {
             User user = Repository.GetUserByID(id);
+
             List<AwardEditView> awards = Repository.GetAwards().Select(award => new AwardEditView
             {
                 Id = award.AwardID,
@@ -48,26 +49,30 @@ namespace SimpleApp.Controllers
                 ExistingPath = award.ImagePath,
                 UserID = user.UserID
             }).ToList();
-            IndexViewModel indexView = new IndexViewModel { Awards = awards,User = user };
+
+            List<UserAward> userAwards = Repository.GetUserAwards().ToList();
+
+            IndexViewModel indexView = new IndexViewModel { Awards = awards, User = user, UserAwards = userAwards };
+
             return View(indexView);
         }
         [HttpPost]
-        public ActionResult Awards(IndexViewModel editView)
+        public ActionResult RewardUser(IndexViewModel index)
         {
-            if(editView != null)
-            {
-                User user = Repository.GetUserByID(editView.AwardEdit.UserID);
+            User user = Repository.GetUserByID(index.User.UserID);
+            Award award = Repository.GetAwardByID(index.AwardEdit.Id);
 
-                    user.Awards.Add(new Award
-                    {
-                        AwardID = editView.AwardEdit.Id,
-                        Title = editView.AwardEdit.Title,
-                        Description = editView.AwardEdit.Description,
-                        ImagePath = editView.AwardEdit.ExistingPath
-                    });
-                    return RedirectToAction("Awards");
+            if (user != null && award != null)
+            {
+                UserAward userAward = new UserAward
+                {
+                    Users = user,
+                    Awards = award
+                };
+                Repository.AddUserAward(userAward);
+                Repository.Save();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Award", new { user.UserID });
         }
 
         public ActionResult Create()
@@ -156,15 +161,15 @@ namespace SimpleApp.Controllers
             try
             {
                 if (ModelState.IsValid)
-                { 
+                {
                     user = Repository.GetUserByID(userView.Id);
                     user.Name = userView.Name;
                     user.Birthdate = userView.Birthdate;
                     user.Age = userView.Age;
 
-                    if(userView.Photo != null)
+                    if (userView.Photo != null)
                     {
-                        if(userView.ExistingPath != null)
+                        if (userView.ExistingPath != null)
                         {
                             string oldPath = Path
                                 .Combine(@"C:\Users\Brother\Desktop\Epam\module8\SimpleApp\SimpleApp\wwwroot\img", Path.GetFileName(userView.ExistingPath));
@@ -192,7 +197,7 @@ namespace SimpleApp.Controllers
         {
             string fileName = Path
                         .Combine(hosting.WebRootPath, "img", Path.GetFileName(userView.Photo.FileName));
-            using(var stream = new FileStream(fileName, FileMode.Create))
+            using (var stream = new FileStream(fileName, FileMode.Create))
             {
                 userView.Photo.CopyTo(stream);
             }

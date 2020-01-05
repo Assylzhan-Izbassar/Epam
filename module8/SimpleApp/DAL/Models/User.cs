@@ -18,6 +18,5 @@ namespace DAL.Models
         public string PhotoPath { get; set; }
 
         public virtual ICollection<UserAward> UserAwards { get; set; }
-        public virtual ICollection<Award> Awards { get; set; }
     }
 }

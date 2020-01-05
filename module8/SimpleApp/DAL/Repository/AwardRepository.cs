@@ -36,6 +36,16 @@ namespace DAL.Repository
             return false;
         }
 
+        public bool AddUserAward(UserAward userAward)
+        {
+            if(userAward != null)
+            {
+                _awardDbContext.UserAwards.Add(userAward);
+                return true;
+            }
+            return false;
+        }
+
         public bool DeleteAward(int awardID)
         {
             Award award = _awardDbContext.Awards.Find(awardID);
@@ -116,6 +126,11 @@ namespace DAL.Repository
                 return true;
             }
             return false;
+        }
+
+        public IEnumerable<UserAward> GetUserAwards()
+        {
+            return _awardDbContext.UserAwards;
         }
     }
 }

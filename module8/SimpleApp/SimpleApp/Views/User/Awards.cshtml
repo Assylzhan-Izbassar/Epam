@@ -1,4 +1,5 @@
 ﻿@using DAL.ViewModel;
+@using DAL.Models;
 @model IndexViewModel
 
 @{
@@ -7,18 +8,32 @@
 
 <h1>Awards</h1>
 
-<form asp-action="Awards">
-    <p>
-        <label asp-for="@Model.AwardEdit" class="col-form-label">Reward the user:</label>
-        <select asp-for="@Model.AwardEdit">
+<form method="post" asp-action="RewardUser">
+    <div class="form-group">
+        <label class="col-form-label">Reward the user:</label>
+        <input hidden asp-for="User.UserID" class="form-control" />
+        <select asp-for="AwardEdit.Id">
             @foreach (AwardEditView award in Model.Awards)
             {
-                <option value="@Model.AwardEdit">@award.Title</option>
+                bool temp = true;
+                @foreach (UserAward user in Model.UserAwards)
+                {
+                    @if (award.UserID == user.UserId && award.Id == user.AwardId)
+                    {
+                        temp = false;
+                        break;
+                    }
+                }
+                @if (temp)
+                {
+                    <option value="@award.Id">@award.Title</option>
+                }
             }
         </select>
-        <input type="submit" value="Reward" />
-    </p>
+        <input type="submit" value="Reward"/>
+    </div>
 </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -37,17 +52,23 @@
     <tbody>
         @foreach (var item in Model.User.UserAwards)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Awards.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Awards.Description)
-            </td>
-            <td>
-                <img class="imgInitStyle" src="@item.Awards.ImagePath" asp-append-version="true" />
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Awards.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Awards.Description)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "Award")">
+                        <img class="imgInitStyle" src="@Url.Content(@item.Awards.ImagePath)" alt="@item.Awards.Title" title="@item.Awards.Title"/>
+                    </a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
