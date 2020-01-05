@@ -1,0 +1,53 @@
+﻿@using DAL.ViewModel;
+@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Awards";
+}
+
+<h1>Awards</h1>
+
+<form asp-action="Awards">
+    <p>
+        <label asp-for="@Model.AwardEdit" class="col-form-label">Reward the user:</label>
+        <select asp-for="@Model.AwardEdit">
+            @foreach (AwardEditView award in Model.Awards)
+            {
+                <option value="@Model.AwardEdit">@award.Title</option>
+            }
+        </select>
+        <input type="submit" value="Reward" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Award.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Award.Description)
+            </th>
+            <th>
+                <label class="col-form-label">Image</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.User.UserAwards)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Awards.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Awards.Description)
+            </td>
+            <td>
+                <img class="imgInitStyle" src="@item.Awards.ImagePath" asp-append-version="true" />
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

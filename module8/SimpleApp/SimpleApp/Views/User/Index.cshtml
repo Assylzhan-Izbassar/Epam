@@ -5,13 +5,12 @@
     ViewData["Title"] = "Index";
 }
 
+    <head>
+        <link href="~/lib/bootstrap/dist/css/bootstrap-yeti.css" rel="stylesheet" />
+        <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    </head>
+
 <h1>Users</h1>
-<style>
-    .imgInitStyle{
-        width:auto;
-        height:60px;
-    }
-</style>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -51,6 +50,7 @@
                 <img class="imgInitStyle" src="@item.PhotoPath" asp-append-version="true"/>
             </td>
             <td>
+                <a asp-action="Awards" asp-route-id="@item.UserID">Awards</a>|
                 <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>

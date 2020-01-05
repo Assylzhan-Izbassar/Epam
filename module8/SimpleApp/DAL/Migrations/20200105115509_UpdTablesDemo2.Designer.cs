@@ -4,14 +4,16 @@ using DAL.Staff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(AwardDbContext))]
-    partial class AwardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200105115509_UpdTablesDemo2")]
+    partial class UpdTablesDemo2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,12 +41,7 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("AwardID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Awards");
                 });
@@ -97,13 +94,6 @@ namespace DAL.Migrations
                     b.ToTable("UserAward");
                 });
 
-            modelBuilder.Entity("DAL.Models.Award", b =>
-                {
-                    b.HasOne("DAL.Models.User", null)
-                        .WithMany("Awards")
-                        .HasForeignKey("UserID");
-                });
-
             modelBuilder.Entity("DAL.Models.UserAward", b =>
                 {
                     b.HasOne("DAL.Models.Award", "Awards")
@@ -111,7 +101,7 @@ namespace DAL.Migrations
                         .HasForeignKey("AwardId");
 
                     b.HasOne("DAL.Models.User", "Users")
-                        .WithMany("UserAwards")
+                        .WithMany("Awards")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

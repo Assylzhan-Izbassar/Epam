@@ -7,6 +7,7 @@ namespace DAL.ViewModel
     public class AwardEditView : AwardView
     {
         public int Id { get; set; }
+        public int UserID { get; set; }
         public string ExistingPath { get; set; }
     }
 }

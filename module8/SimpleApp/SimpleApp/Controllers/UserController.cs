@@ -4,20 +4,11 @@ using DAL.Repository;
 using DAL.Staff;
 using DAL.Models;
 using System.Data;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using DAL.ViewModel;
 using System.IO;
-using System.Web;
 using Microsoft.AspNetCore.Hosting;
-using System.Data.SqlClient;
-using System.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using System.Text;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SimpleApp.Controllers
 {
@@ -44,6 +35,39 @@ namespace SimpleApp.Controllers
         public ViewResult Details(int id)
         {
             return View(Repository.GetUserByID(id));
+        }
+
+        public ViewResult Awards(int id)
+        {
+            User user = Repository.GetUserByID(id);
+            List<AwardEditView> awards = Repository.GetAwards().Select(award => new AwardEditView
+            {
+                Id = award.AwardID,
+                Title = award.Title,
+                Description = award.Description,
+                ExistingPath = award.ImagePath,
+                UserID = user.UserID
+            }).ToList();
+            IndexViewModel indexView = new IndexViewModel { Awards = awards,User = user };
+            return View(indexView);
+        }
+        [HttpPost]
+        public ActionResult Awards(IndexViewModel editView)
+        {
+            if(editView != null)
+            {
+                User user = Repository.GetUserByID(editView.AwardEdit.UserID);
+
+                    user.Awards.Add(new Award
+                    {
+                        AwardID = editView.AwardEdit.Id,
+                        Title = editView.AwardEdit.Title,
+                        Description = editView.AwardEdit.Description,
+                        ImagePath = editView.AwardEdit.ExistingPath
+                    });
+                    return RedirectToAction("Awards");
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult Create()

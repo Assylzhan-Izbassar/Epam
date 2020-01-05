@@ -23,6 +23,12 @@ namespace DAL.Staff
         {
             string connectionString = @"Server = .\SQLEXPRESS; Database = AwardDB; Trusted_Connection = True;";
             optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Award>().HasMany(x => x.Users).WithOne(x => x.Awards);
+            modelBuilder.Entity<User>().HasMany(x => x.UserAwards).WithOne(x => x.Users);
         }
     }
 }
