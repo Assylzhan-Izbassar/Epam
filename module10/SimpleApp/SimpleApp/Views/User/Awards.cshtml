@@ -1,0 +1,74 @@
+﻿@using DAL.ViewModel;
+@using DAL.Models;
+@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Awards";
+}
+
+<h1>Awards</h1>
+
+<form method="post" asp-action="RewardUser">
+    <div class="form-group">
+        <label class="col-form-label">Reward the user:</label>
+        <input hidden asp-for="User.UserID" class="form-control" />
+        <select asp-for="AwardEdit.Id">
+            @foreach (AwardEditView award in Model.Awards)
+            {
+                bool temp = true;
+                @foreach (UserAward user in Model.UserAwards)
+                {
+                    @if (award.UserID == user.UserId && award.Id == user.AwardId)
+                    {
+                        temp = false;
+                        break;
+                    }
+                }
+                @if (temp)
+                {
+                    <option value="@award.Id">@award.Title</option>
+                }
+            }
+        </select>
+        <input type="submit" value="Reward"/>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Award.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Award.Description)
+            </th>
+            <th>
+                <label class="col-form-label">Image</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.User.UserAwards)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Awards.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Awards.Description)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "Award")">
+                        <img class="imgInitStyle" src="@Url.Content(@item.Awards.ImagePath)" alt="@item.Awards.Title" title="@item.Awards.Title"/>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

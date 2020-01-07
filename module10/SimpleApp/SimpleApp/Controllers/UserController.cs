@@ -9,17 +9,14 @@ using DAL.ViewModel;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading.Tasks;
 
 namespace SimpleApp.Controllers
 {
     public class UserController : Controller
     {
-        private IAwardRepository Repository;
         [Obsolete]
         private readonly IHostingEnvironment hosting;
+        private IAwardRepository Repository;
 
         [Obsolete]
         public UserController(IHostingEnvironment hosting)
@@ -28,6 +25,7 @@ namespace SimpleApp.Controllers
             this.hosting = hosting;
         }
 
+        [Route("users")]
         public IActionResult Index()
         {
             var users = from user in Repository.GetUsers()
@@ -35,6 +33,27 @@ namespace SimpleApp.Controllers
             return View(users);
         }
 
+        [Route("users/{name:maxlength(10)}")]
+        public IActionResult ListByName(string name)
+        {
+            List<User> users = null;
+            if (name.Length == 1)
+            {
+                users = Repository.GetUsers()
+                .Where(x => x.Name[0] == name[0])
+                .ToList();
+            }
+            else
+            {
+                users = Repository.GetUsers()
+                .Where(x => x.Name == name)
+                .ToList();
+            }
+
+            return View(users);
+        }
+
+        [Route("user/{id:int}")]
         public ViewResult Details(int id)
         {
             return View(Repository.GetUserByID(id));
@@ -59,6 +78,7 @@ namespace SimpleApp.Controllers
 
             return View(indexView);
         }
+
         [HttpPost]
         public ActionResult RewardUser(IndexViewModel index)
         {
@@ -78,12 +98,14 @@ namespace SimpleApp.Controllers
             return RedirectToAction("Award", new { user.UserID });
         }
 
+        [HttpGet("/create-user")]
         public ActionResult Create()
         {
             return View(new UserView());
         }
-        [HttpPost]
+
         [Obsolete]
+        [HttpPost("/create-user")]
         public ActionResult Create(UserView userView)
         {
             User user = null;
@@ -115,6 +137,7 @@ namespace SimpleApp.Controllers
             return View(user);
         }
 
+        [Route("user/{id:int}/delete")]
         public ActionResult Delete(int id, bool? saveChangesError)
         {
             if (saveChangesError.GetValueOrDefault())
@@ -126,7 +149,9 @@ namespace SimpleApp.Controllers
 
             return View(user);
         }
+
         [HttpPost, ActionName("Delete")]
+        [Route("user/{id:int}/delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             try
@@ -141,6 +166,7 @@ namespace SimpleApp.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("user/{id:int}/edit")]
         public ActionResult Edit(int id)
         {
             User user = Repository.GetUserByID(id);
@@ -155,8 +181,10 @@ namespace SimpleApp.Controllers
             };
             return View(view);
         }
+
         [HttpPost]
         [Obsolete]
+        [Route("user/{id:int}/edit")]
         public ActionResult Edit(UserEditViewModel userView)
         {
             User user = null;
@@ -207,7 +235,6 @@ namespace SimpleApp.Controllers
 
             return fileName;
         }
-
         /*public FileResult Download()
         {
             var list = Repository.GetUsers().ToList();

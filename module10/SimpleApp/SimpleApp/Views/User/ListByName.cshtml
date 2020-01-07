@@ -1,0 +1,65 @@
+﻿@using DAL.Models;
+@model List<User>
+
+@{
+    ViewData["Title"] = "ListByName";
+}
+
+<h1>List of users</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <div>
+                    Name
+                </div>
+            </th>
+            <th>
+                <div>
+                    Birthdate
+                </div>
+            </th>
+            <th>
+                <div>
+                    Age
+                </div>
+            </th>
+            <th>
+                <div>
+                    Photo
+                </div>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    <img class="imgInitStyle" src="@item.PhotoPath" asp-append-version="true" />
+                </td>
+                <td>
+                    <a asp-action="Awards" asp-route-id="@item.UserID">Awards</a> |
+                    <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
