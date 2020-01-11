@@ -1,0 +1,25 @@
+﻿@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<form method="post" asp-action="Login" asp-controller="Account" asp-antiforgery="true" asp-route-returnUrl="@Model.ReturnUrl">
+    <div class="was-validated", asp-validation-summary="ModelOnly"></div>
+    <div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label">Email</label><br />
+            <input asp-for="Email" type="text"  class="form-control" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label">Password</label><br />
+            <input asp-for="Password"  class="form-control" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Enter" class="btn btn-primary"/>
+        </div>
+    </div>
+</form>
