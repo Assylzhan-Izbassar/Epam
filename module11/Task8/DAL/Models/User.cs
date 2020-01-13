@@ -22,5 +22,10 @@ namespace DAL.Models
 
         public virtual ICollection<UserAward> UserAwards { get; set; }
         public virtual Role Role { get; set; }
+
+        public override string ToString()
+        {
+            return "User name: " + Name + ", he/she " + Age + " years old, " + "and birthday: " + Birthdate.ToString();
+        }
     }
 }

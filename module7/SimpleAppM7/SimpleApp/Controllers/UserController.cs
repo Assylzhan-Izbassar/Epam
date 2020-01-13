@@ -176,22 +176,38 @@ namespace SimpleApp.Controllers
             return fileName;
         }
 
-        /*protected Task<IActionResult> Download()
+        public FileResult Download()
         {
             var list = Repository.GetUsers().ToList();
-            MemoryStream stream = null;
-            using (stream = new MemoryStream(list.Count()))
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < list.Count(); ++i)
             {
-                IFormatter formatter = new BinaryFormatter();
-                foreach (var data in list)
-                {
-                    formatter.Serialize(stream, data);
-                }
-                stream.Seek(0, SeekOrigin.Begin);
-                object file = formatter.Deserialize(stream);
+                stringBuilder.Append((i + 1) + ")" + list[i].ToString() + "\n");
+            }
+            string content = stringBuilder.ToString();
+            stringBuilder.Clear();
+
+            var binFormater = new BinaryFormatter();
+            var ms = new MemoryStream();
+            byte[] byteFile = null;
+
+            try
+            {
+                binFormater.Serialize(ms, content);
+            }
+            catch (SerializationException e)
+            {
+                ModelState.AddModelError("", "Failed to serialize. Reason: " + e.Message);
+            }
+            finally
+            {
+                byteFile = ms.ToArray();
+                ms.Close();
             }
 
-            return System.IO.File(stream);
-        }*/
+            return File(byteFile, "application/force-download", "data.txt");
+        }
     }
 }

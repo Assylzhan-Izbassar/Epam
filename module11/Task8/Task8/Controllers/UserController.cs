@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using DAL.Repository;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using System.Text;
 
 namespace Task6.Controllers
 {
@@ -26,7 +30,6 @@ namespace Task6.Controllers
             this.hosting = hosting;
         }
 
-        #region Main methods to show item(s)
         [Route("users")]
         [AllowAnonymous]
         public IActionResult Index()
@@ -63,9 +66,7 @@ namespace Task6.Controllers
         {
             return View(Repository.GetUserByID(id));
         }
-        #endregion
 
-        #region Methods that show awards
         [Authorize(Roles = "admin, user")]
         public ViewResult Awards(int id)
         {
@@ -106,9 +107,8 @@ namespace Task6.Controllers
             }
             return RedirectToAction("Award", new { user.UserID });
         }
-        #endregion
 
-        #region Create action of a user
+
         [HttpGet("/create-user")]
         [Authorize(Roles = "admin")]
         public PartialViewResult Create()
@@ -149,9 +149,7 @@ namespace Task6.Controllers
             }
             return View(user);
         }
-        #endregion
 
-        #region Delete ActionResult
         [Route("user/{id:int}/delete")]
         [Authorize(Roles = "admin")]
         public ActionResult Delete(int id, bool? saveChangesError)
@@ -182,9 +180,7 @@ namespace Task6.Controllers
             }
             return RedirectToAction("Index");
         }
-        #endregion
 
-        #region Edit action of a user
         [Route("user/{id:int}/edit")]
         [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
@@ -243,7 +239,6 @@ namespace Task6.Controllers
             }
             return View(user);
         }
-        #endregion
 
         [Obsolete]
         private string SetPhotoPath(UserView userView)
@@ -258,23 +253,39 @@ namespace Task6.Controllers
             return fileName;
         }
 
-        /*public FileResult Download()
+        public FileResult Download()
         {
             var list = Repository.GetUsers().ToList();
-            MemoryStream stream = null;
-            using (stream = new MemoryStream(list.Count()))
+
+            StringBuilder stringBuilder = new StringBuilder();
+            
+            for(int i=0; i < list.Count(); ++i)
             {
-                IFormatter formatter = new BinaryFormatter();
-                foreach (var data in list)
-                {
-                    formatter.Serialize(stream, data);
-                }
-                stream.Seek(0, SeekOrigin.Begin);
-                object file = formatter.Deserialize(stream);
+                stringBuilder.Append((i+1) + ")" + list[i].ToString() + "\n");
+            }
+            string content = stringBuilder.ToString();
+            stringBuilder.Clear();
+
+            var binFormater = new BinaryFormatter();
+            var ms = new MemoryStream();
+            byte[] byteFile = null;
+
+            try
+            {
+                binFormater.Serialize(ms, content);
+            }
+            catch (SerializationException e)
+            {
+                ModelState.AddModelError("", "Failed to serialize. Reason: " + e.Message);
+            }
+            finally
+            {
+                byteFile = ms.ToArray();
+                ms.Close();
             }
 
-            return File(stream, ".txt");
-        }*/
+            return File(byteFile, "application/force-download", "data.txt");
+        }
 
         public JsonResult Remove(int id)
         {
