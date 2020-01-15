@@ -81,3 +81,8 @@ body {
 .table thead th {
     background-color: aliceblue;
 }
+
+.jrow{
+    display:none;
+}
+

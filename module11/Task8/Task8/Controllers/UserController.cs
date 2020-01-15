@@ -14,6 +14,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Task6.Controllers
 {
@@ -111,15 +113,15 @@ namespace Task6.Controllers
 
         [HttpGet("/create-user")]
         [Authorize(Roles = "admin")]
-        public PartialViewResult Create()
+        public ViewResult Create()
         {
-            return PartialView(new UserView());
+            return View(new UserView());
         }
 
         [Obsolete]
         [HttpPost("/create-user")]
         [Authorize(Roles = "admin")]
-        public ActionResult Create(UserView userView)
+        public async Task<ActionResult> Create(UserView userView)
         {
             User user = null;
 
@@ -137,6 +139,12 @@ namespace Task6.Controllers
                         Age = userView.Age,
                         PhotoPath = path
                     };
+
+                    Role userRole = await Repository.GetRoles().FirstOrDefaultAsync(r => r.Name == "user");
+
+                    if (userRole != null)
+                        user.Role = userRole;
+
 
                     Repository.AddUser(user);
                     Repository.Save();
@@ -258,6 +266,7 @@ namespace Task6.Controllers
             var list = Repository.GetUsers().ToList();
 
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Clear();
             
             for(int i=0; i < list.Count(); ++i)
             {
@@ -297,6 +306,23 @@ namespace Task6.Controllers
                 Repository.Save();
 
                 return Json(true);
+            }
+            return Json(false);
+        }
+
+        public async Task<JsonResult> Generate(User user)
+        {
+            if(ModelState.IsValid)
+            {
+                Role userRole = await Repository.GetRoles().FirstOrDefaultAsync(r => r.Name == "user");
+
+                if (userRole != null)
+                    user.Role = userRole;
+
+                Repository.AddUser(user);
+                Repository.Save();
+
+                return Json("User is successfully created!");
             }
             return Json(false);
         }

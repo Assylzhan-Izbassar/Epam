@@ -9,8 +9,10 @@
 
 <p>
     <a asp-action="Create">Create New</a>
-</p>
-
+    <div>
+        <input type="button" id="generate" value="Create New" />
+    </div>
+</p> 
 
 <table class="table">
     <thead>
@@ -59,6 +61,58 @@
     </tbody>
 </table>
 
+@*Modal with Create New*@
+
+<div class="modal fade" id="showMod">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Create a new user</h4>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div>
+                <div id="goodMessage">
+                    <div class="alert alert-success">
+                        <span class="text-body"></span>
+                        <strong>You succesfully created a new user!</strong>
+                    </div>
+                </div>
+                <div id="notGoodMessage">
+                    <div class="alert alert-danger">
+                        <span class="text-body"></span>
+                        <strong>Some fields is not filled!</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form id="create">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input class="form-control" type="text" name="Name" id="userName" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input class="form-control" type="date" name="Birthdate" id="birth" placeholder="Birthdate" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input class="form-control" type="number" name="Age" id="age" placeholder="Age" />
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <button id="saveForm" class="btn btn-info form-control" type="submit">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <p>
     <a asp-action="Download">Download</a>
 </p>
@@ -68,7 +122,7 @@
         var urls = {
             removeUser: '@Url.ActionLink("Remove", "User")'
         }
+        
     </script>
-
     <script src ="~/js/userModify.js"></script>
 }
