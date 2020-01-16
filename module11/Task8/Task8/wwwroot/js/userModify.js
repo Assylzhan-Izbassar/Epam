@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('.remove').click(function () {
+    /*$('.remove').click(function () {
         let user = $(this).closest('.user');
         let userId = user.data('id');
         let url = urls.removeUser + '?id=' + userId;
@@ -9,7 +9,7 @@
                 user.remove();
             }
         });
-    });
+    });*/
 
     $('#generate').click(function() {
         $('#showMod').modal();

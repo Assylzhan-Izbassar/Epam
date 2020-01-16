@@ -12,6 +12,9 @@
     <div>
         <input type="button" id="generate" value="Create New" />
     </div>
+    <div class="justify-content-end">
+        <input type ="button" id="update" value="Update" onclick="ReloadPage()"/>
+    </div>
 </p> 
 
 <table class="table">
@@ -34,30 +37,8 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="user" data-id="@item.UserID">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Birthdate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-                <td>
-                    <img class="imgInitStyle" src="@item.PhotoPath" asp-append-version="true" />
-                </td>
-                <td>
-                    <a asp-action="Awards" asp-route-id="@item.UserID">Awards</a> |
-                    <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.UserID">Details</a> | 
-                    <input class="remove" type="button" value="Delete"/> 
-                </td>
-            </tr>
-        }
+    <tbody id="content">
+
     </tbody>
 </table>
 
@@ -122,7 +103,43 @@
         var urls = {
             removeUser: '@Url.ActionLink("Remove", "User")'
         }
-        
+        function ReloadPage() {
+            $.get("/User/Update", DataGrid);
+            function DataGrid(response) {
+                let setData = $("#content");
+                setData.empty();
+                for (let i = 0; i < response.length; ++i) {
+
+                    var data = null;
+                    if (response[i].existingPath) {
+                        data = "<tr>"
+                            + `<td> ${response[i].name} </td>`
+                            + `<td> ${response[i].birthdate} </td>`
+                            + `<td> ${response[i].age} </td>`
+                            + `<img class="imgInitStyle" ` + ` src= '${response[i].existingPath}'/>`
+                            + "<td>"
+                            + `<a href = "/User/Awards" data-id="${response.id}">Awards</a> | `
+                            + `<a href="/User/Edit" data-id="${response.id}">Edit</a> | `
+                            + `<a href="/User/Details" data-id="${response.id}">Details</a> | `
+                            + "</td>"
+                            + "</tr>";
+                    }
+                    else {
+                        data = "<tr>"
+                            + `<td> ${response[i].name} </td>`
+                            + `<td> ${response[i].birthdate} </td>`
+                            + `<td> ${response[i].age} </td>`
+                            + "<td>"
+                            + `<a href = "/User/Awards" data-id="${response.id}">Awards</a> | `
+                            + `<a href="/User/Edit" data-id="${response.id}">Edit</a> | `
+                            + `<a href="/User/Details" data-id="${response.id}">Details</a> | `
+                            + "</td>"
+                            + "</tr>";
+                    }
+                    setData.append(data);
+                }
+            }
+        }
     </script>
     <script src ="~/js/userModify.js"></script>
 }

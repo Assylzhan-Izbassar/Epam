@@ -16,6 +16,7 @@ using System.Xml.Serialization;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Task6.Controllers
 {
@@ -325,6 +326,21 @@ namespace Task6.Controllers
                 return Json("User is successfully created!");
             }
             return Json(false);
+        }
+
+        public JsonResult Update()
+        {
+            List<UserEditViewModel> users = Repository.GetUsers()
+                .Select(x => new UserEditViewModel
+                {
+                    Id = x.UserID,
+                    Name = x.Name,
+                    Birthdate = x.Birthdate,
+                    Age = x.Age,
+                    ExistingPath = x.PhotoPath
+                }).ToList();
+
+            return Json(users);
         }
     }
 }
