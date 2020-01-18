@@ -6,13 +6,14 @@ namespace DAL.Entities
 {
     public class Post : BaseEntity
     {
+        public int PostId { get; set; }
         public string Title { get; set; }
         public string ShortDescription { get; set; }
         public string Meta { get; set; }
         public bool Published { get; set; }
         public DateTime PostedOn { get; set; }
         public DateTime? Modified { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
+        public Category Category { get; set; }
+        public virtual ICollection<PostTag> PostTags { get; set; }
     }
 }

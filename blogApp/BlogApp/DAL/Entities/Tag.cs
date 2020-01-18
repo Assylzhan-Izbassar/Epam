@@ -5,8 +5,9 @@ using System.Text;
 namespace DAL.Entities
 {
     public class Tag : BaseEntity
-    {
+    { 
+        public int TagId { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<PostTag> TagPosts { get; set; }
     }
 }
