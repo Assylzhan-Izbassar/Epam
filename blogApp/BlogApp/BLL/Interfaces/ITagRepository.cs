@@ -5,13 +5,12 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
-    public interface ITagRepository
+    public interface ITagRepository : IDisposable, IBaseRepository
     {
         IEnumerable<Tag> GetTags();
         Tag GetTagById(int tagId);
         void InsertTag(Tag tag);
         void UpdateTag(Tag tag);
         void DeleteTag(int tagId);
-        void SaveTag();
     }
 }

@@ -5,13 +5,12 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
-    public interface ICategoryRepository
+    public interface ICategoryRepository : IDisposable, IBaseRepository
     {
         IEnumerable<Category> GetCategories();
         Category GetCategoryById(int categoryId);
         void InsertCategory(Category category);
         void UpdateCategory(Category category);
         void DeleteCategory(int categoryId);
-        void SaveCategory();
     }
 }

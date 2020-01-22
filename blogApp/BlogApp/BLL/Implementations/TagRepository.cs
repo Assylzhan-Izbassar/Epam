@@ -1,41 +1,77 @@
 ﻿using BLL.Interfaces;
+using DAL;
 using DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BLL.Implementations
 {
     public class TagRepository : ITagRepository
     {
+        private BlogDbContext _blogDbContext;
+        private bool disposed = false;
+
+        public TagRepository(BlogDbContext dbContext)
+        {
+            _blogDbContext = dbContext;
+        }
+
         public void DeleteTag(int tagId)
         {
-            throw new NotImplementedException();
+            Tag tag = _blogDbContext.Tags.Find(tagId);
+
+            if(tag != null)
+            {
+                _blogDbContext.Tags.Remove(tag);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposed && disposing)
+            {
+                _blogDbContext.Dispose();
+            }
+            disposed = true;
         }
 
         public Tag GetTagById(int tagId)
         {
-            throw new NotImplementedException();
+            return _blogDbContext.Tags.Find(tagId);
         }
 
         public IEnumerable<Tag> GetTags()
         {
-            throw new NotImplementedException();
+            return _blogDbContext.Tags.ToList();
         }
 
         public void InsertTag(Tag tag)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SaveTag()
-        {
-            throw new NotImplementedException();
+            if(tag != null)
+            {
+                _blogDbContext.Tags.Add(tag);
+            }
         }
 
         public void UpdateTag(Tag tag)
         {
-            throw new NotImplementedException();
+            if (tag != null)
+            {
+                _blogDbContext.Entry(tag).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
+        }
+
+        public void Save()
+        {
+            _blogDbContext.SaveChanges();
         }
     }
 }

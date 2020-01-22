@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using BLL.Implementations;
+using BLL.Interfaces;
 using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +32,12 @@ namespace BlogApp
 
             services.AddDbContext<BlogDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BlogDbContext")));
+
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
+            services.AddTransient<IPostTagRepository, PostTagRepository>();
+            services.AddScoped<DataManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +64,7 @@ namespace BlogApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Blog}/{action=Posts}/{id?}");
             });
         }
     }

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - The Post-Realism</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+    <div class="init">
+        <div class="container">
+            <div class="init_inner">
+                <h1 class="init_title">The Post-Realism</h1>
+            </div>
+            <header class="header">
+                <div class="container">
+                    <!-- <div class="line"></div> -->
+                    <div class="header_inner">
+                        <nav class="nav">
+                            <a class="nav_link text-dark" asp-area="" asp-controller="Blog" asp-action="Posts">Home</a>
+                            <a class="nav_link" href="#">Search</a>
+                            <a class="nav_link" href="#">Archives</a>
+                            <a class="nav_link" href="#">Contact</a>
+                            <a class="nav_link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </nav>
+                    </div>
+                    <!-- <div class="line"></div> -->
+                </div>
+            </header>
+        </div>
+    </div> <!--init-->
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer_inner">
+            <div class="column init_column">
+                <h2 class="main_footer_title">
+                    The Post-Realism
+                </h2>
+                <p id="ex_column">
+                    Personal Blog
+                </p>
+                <p class="p_footer">Follow us:</p>
+                <span class="init_text">
+                    Copyright © 2020 The Post-Realism, Inc. All rights reserved. The
+                    Post-Realism is a trademark of BlogCo, Inc.
+                </span>
+            </div>
+            <div class="column">
+                <h3 class="footer_title">membership</h3>
+                <ul>
+                    <li>
+                        <a id="a_item" href="#">Join</a>
+                    </li>
+                    <li>
+                        <a id="a_item" href="#">Success Stories</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3 class="footer_title">Free Goodies</h3>
+                <ul>
+                    <li>
+                        <a id="a_item" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3 class="footer_title">The Post-Realism</h3>
+                <ul>
+                    <li>
+                        <a id="a_item" href="#">About</a>
+                    </li>
+                    <li>
+                        <a id="a_item" href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a id="a_item" href="#">Support</a>
+                    </li>
+                    <li>
+                        <a id="a_item" href="#">Privacy</a>
+                    </li>
+                    <li>
+                        <a id="a_item" href="#">Terms</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script defer
+            src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

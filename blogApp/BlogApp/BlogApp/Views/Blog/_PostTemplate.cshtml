@@ -1,0 +1,59 @@
+﻿@using DAL.Entities;
+@model Post;
+
+<div class="post">
+    <div class="post-meta">
+        <div class="row">
+            <!--Heading-->
+            <div class="post-title">
+                <h2>@Html.ActionLink(Model.Title, "Post", "Blog",
+                new
+                {
+                    year = Model.PostedOn.Year,
+                    month = Model.PostedOn.Month,
+                    title = Model.UrlSlug
+                },
+                new { title = Model.Title })</h2>
+            </div>
+        </div>
+        <div class="row">
+            <!--Category-->
+            <div class="post-category">
+                <span>Category: </span>@*@Html.ActionLink(Model.Category.Name, "Category", "Blog",
+        new {
+            category = Model.Category.UrlSlug
+        },
+        new {
+            title = String.Format("See all posts in {0}", Model.Category.Name)
+        });*@
+            </div>
+            <!--Tag-->
+            <div class="post-tag">
+                <span>Tag(s): </span>@*@Html.ActionLink(Model.PostTags.First().Tag.Name, "Tag", "Blog", new { tag = Model.PostTags.First().Tag.UrlSlug },
+        new {
+        title = String.Format("See all posts in {0}", Model.PostTags.First().Tag.Name)
+        });*@
+            </div>
+            <!--Posted date-->
+            <div class="posted-date">
+                @Model.PostedOn
+            </div>
+
+        </div>
+        <!--Short Description-->
+        <div class="post-data">
+            @Html.Raw(Model.ShortDescription)
+        </div>
+
+        <div class="post-footer">
+            @Html.ActionLink("continue...", "Post", "Blog",
+           new {
+               year = Model.PostedOn.Year,
+               month = Model.PostedOn.Month,
+               day = Model.PostedOn.Day,
+               title = Model.UrlSlug
+            },
+            new { title = "continue..."})
+        </div>
+    </div>
+</div>
