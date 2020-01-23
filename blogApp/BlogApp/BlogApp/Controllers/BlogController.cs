@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using BLL;
 using DAL.Entities;
-using Microsoft.AspNetCore.Mvc;
 using PL.Models;
 
 namespace BlogApp.Controllers
@@ -24,6 +24,12 @@ namespace BlogApp.Controllers
             var listViewModel = new ListViewModel(_dataManager, p);
 
             return View(listViewModel);
+        }
+
+        public PartialViewResult Sidebars()
+        {
+            var widgetViewModel = new WidgetViewModel(_dataManager);
+            return PartialView("_Sidebars", widgetViewModel);
         }
 
         [HttpGet]
@@ -47,8 +53,7 @@ namespace BlogApp.Controllers
                         Title = postModel.Title,
                         Description = postModel.Description,
                         ShortDescription = postModel.Description.Substring(0, 30),
-                        Category = postModel.Category,
-                        UrlSlug = Request.Scheme
+                        Category = postModel.Category
                     };
 
                     List<PostTag> postTags = postModel.Tags.Select(tag => new PostTag

@@ -19,6 +19,7 @@ namespace DAL
 
         public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

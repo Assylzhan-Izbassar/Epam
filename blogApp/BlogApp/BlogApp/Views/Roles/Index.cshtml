@@ -1,0 +1,29 @@
+﻿@using DAL.Entities;
+@model List<Role>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Blog/_Layout.cshtml";
+}
+
+<h1>List of roles</h1>
+
+<table class="table">
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>
+                <form method="post" asp-action="Delete" asp-controller="Roles" asp-route-id="@item.Id">
+                    <button  type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<a asp-action="Create" asp-controller="Roles">Create a role</a>
+<a asp-action="UserList" asp-controller="Roles">List of users</a>
+

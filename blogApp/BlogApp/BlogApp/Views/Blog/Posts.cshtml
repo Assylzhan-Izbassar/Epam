@@ -5,87 +5,58 @@
     ViewData["Title"] = "Posts";
 }
 
-<div class="main_">
-    <div class="main_container">
-        <h2 class="main_title">Latest Posts</h2>
-        @foreach (var item in Model.Posts)
-        {
-            <section class="section">
-                <div class="container">
-                    <section class="section_header">
-                        <h2 class="section_title">
-                            @Html.DisplayFor(model => item.Title)
-                        </h2>
-                        <div class="description">
-                            <div class="description_inner">
-                                <div class="section_category">
-                                    <div>
-                                        @Html.DisplayNameFor(model => item.Category): 
-                                    </div>
-                                    <div>
-                                        @Html.DisplayFor(model => item.Category.Name)
-                                    </div>
-                                </div>
-                                <div class="section_tag">
-                                    <div>
-                                        @Html.DisplayNameFor(model => Model.Relation.Tag):
-                                    </div>
-                                    <div>
-                                        @*Здесь будет прописыватся элементы тегов*@
-                                        @foreach(var tag in Model.Relation.Tags)
-                                        {
-                                            @foreach(var post in Model.Relation.PostTags)
-                                            {
-                                                @if(tag.TagId == post.TagId)
-                                                {
-                                                    <div>@tag.Name</div>
-                                                }
-                                            }
-                                        }
-                                    </div>
-                                </div>
+<h2 class="main_title">Latest Posts</h2>
+
+@foreach (var item in Model.Posts)
+{
+    <section class="section">
+        <div class="container">
+            <section class="section_header">
+                <h2 class="section_title">
+                    @Html.DisplayFor(model => item.Title)
+                </h2>
+                <div class="description">
+                    <div class="description_inner">
+                        <div class="section_category">
+                            <div>
+                                @Html.DisplayNameFor(model => item.Category):
                             </div>
-                            <h3 class="section_date">@Html.DisplayFor(model=>item.PostedOn)</h3>
+                            <div>
+                                @Html.DisplayFor(model => item.Category.Name)
+                            </div>
                         </div>
-                        <div class="section_text">
-                            <p>
-                                @Html.DisplayFor(model => item.ShortDescription);
-                            </p>
+                        <div class="section_tag">
+                            <div>
+                                @Html.DisplayNameFor(model => Model.Relation.Tag):
+                            </div>
+                            <div>
+                                @*Здесь будет прописыватся элементы тегов*@
+                                @foreach (var tag in Model.Relation.Tags)
+                                {
+                                    @foreach (var post in Model.Relation.PostTags)
+                                    {
+                                        @if (tag.TagId == post.TagId)
+                                        {
+                                            <div>@tag.Name</div>
+                                        }
+                                    }
+                                }
+                            </div>
                         </div>
-                    </section>
+                    </div>
+                    <h3 class="section_date">@Html.DisplayFor(model => item.PostedOn)</h3>
+                </div>
+                <div class="section_text">
+                    <p>
+                        @Html.DisplayFor(model => item.ShortDescription);
+                    </p>
                 </div>
             </section>
-        }
+        </div>
+    </section>
+
+    <div class="continue_btn">
+        <a class="nav_link text-dark" asp-area="" asp-controller="Blog" asp-action="Details">continue...</a>
     </div>
 
-    <div class="sidebar">
-
-        <div class="search">
-            <div class="search_box">
-                <input class="search_txt" type="text" placeholder="Type to search" />
-                <a class="search_btn" href="#">
-                    <i class="fas fa-search"></i>
-                </a>
-            </div>
-        </div>
-
-
-        <div class="pop_tags">
-            <div class="title_tag">
-                <h2 id="tags_title">Popular tags</h2>
-            </div>
-            <div class="tag_column">
-                <ul id="list">
-                    @foreach (var item in Model.Relation.Tags)
-                    {
-                        <li class="list_item">
-                            <a id="list_a" href="#">@Html.DisplayNameFor(model => item)</a>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-
-    </div>  <!-- sidebar -->
-
-</div>
+}

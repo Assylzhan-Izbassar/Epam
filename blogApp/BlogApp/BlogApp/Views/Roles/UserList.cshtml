@@ -1,0 +1,22 @@
+﻿@using DAL.Entities;
+@model IEnumerable<User>;
+
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Blog/_Layout.cshtml";
+}
+
+<h1>List of users</h1>
+
+<table class="table">
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.Email</td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-controller="Roles" asp-route-userid="@item.Id">Access</a>
+            </td>
+        </tr>
+    }
+</table>
+

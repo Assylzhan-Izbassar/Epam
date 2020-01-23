@@ -1,0 +1,38 @@
+﻿@using PL.Models;
+@model UserEditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Blog/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<form asp-action="Edit" asp-controller="User">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+        <input type="hidden" asp-for="UserId" />
+    </div>
+    <div>
+        <label asp-for="Email" class="control-label">Email</label>
+        <input type="text" asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Birthdate" class="control-label">Birthdate</label>
+        <input type="text" asp-for="Birthdate" class="form-control" />
+        <span asp-validation-for="Birthdate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" asp-controller="User">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
