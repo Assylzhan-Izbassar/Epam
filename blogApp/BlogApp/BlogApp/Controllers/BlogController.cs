@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using BLL;
 using DAL.Entities;
 using PL.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogApp.Controllers
 {
@@ -32,17 +33,20 @@ namespace BlogApp.Controllers
             return PartialView("_Sidebars", widgetViewModel);
         }
 
-        [HttpGet]
         public ViewResult Create()
         {
             List<Category> categories = _dataManager.Category.GetCategories().ToList();
+            List<Tag> tags = _dataManager.Tag.GetTags().ToList();
 
-            ViewBag.Categories = categories;
+            ViewBag.Categories = new SelectList(categories, "Name", "Name");
+            ViewBag.Tags = new SelectList(tags, "Name", "Name");
 
-            return View(new PostViewModel());
+            PostEditModel postModel = new PostEditModel { Tags = tags, Categories = categories };
+
+            return View(postModel);
         }
         [HttpPost]
-        public ActionResult Create(PostViewModel postModel)
+        public ActionResult Create(PostEditModel postModel)
         {
             try
             {
@@ -52,17 +56,18 @@ namespace BlogApp.Controllers
                     {
                         Title = postModel.Title,
                         Description = postModel.Description,
-                        ShortDescription = postModel.Description.Substring(0, 30),
-                        Category = postModel.Category
+                        ShortDescription = postModel.Description.Substring(0, 3),
+                        Category = _dataManager.Category.GetCategoryById(postModel.Category.CategoryId)
                     };
 
-                    List<PostTag> postTags = postModel.Tags.Select(tag => new PostTag
+                    PostTag postTag = new PostTag
                     {
                         Post = post,
-                        Tag = tag
-                    }).ToList();
+                        Tag = _dataManager.Tag.GetTagById(postModel.Tag.TagId)
 
-                    post.PostTags = postTags;
+                    };
+
+                    _dataManager.PostTag.AddPostTag(postTag);
 
                     if(postModel.Published == true)
                     {
@@ -75,8 +80,9 @@ namespace BlogApp.Controllers
                     }
 
                     _dataManager.Post.InsertPost(post);
+                    _dataManager.Post.Save();
 
-                    return RedirectToAction("Posts");
+                    return RedirectToAction("Index", "User");
                 }
             }
             catch (DataException)
@@ -84,6 +90,40 @@ namespace BlogApp.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             return View(postModel);
+        }
+
+        [HttpPost]
+        public JsonResult SaveTag(TagEditModel model)
+        {
+            try
+            {
+                if (model.TagId > 0)
+                {
+                    Tag tag = _dataManager.Tag.GetTags().ToList().SingleOrDefault(x => x.TagId == model.TagId);
+                    tag.Name = model.Name;
+                    tag.Description = model.Description;
+                    tag.UrlSlug = model.UrlSlug;
+                    _dataManager.Tag.Save();
+                    return Json(tag);
+                }
+                else
+                {
+                    Tag tag = new Tag
+                    {
+                        Name = model.Name,
+                        Description = model.Description,
+                        UrlSlug = model.UrlSlug
+                    };
+                    _dataManager.Tag.InsertTag(tag);
+                    _dataManager.Tag.Save();
+                    return Json(tag);
+                }
+            }
+            catch(DataException)
+            {
+
+            }
+            return Json(false);
         }
     }
 }

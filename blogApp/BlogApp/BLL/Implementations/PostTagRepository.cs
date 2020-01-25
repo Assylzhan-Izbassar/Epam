@@ -41,5 +41,13 @@ namespace BLL.Implementations
         {
             _blogDbContext.SaveChanges();
         }
+
+        public void AddPostTag(PostTag postTag)
+        {
+            if (postTag != null)
+            {
+                _blogDbContext.PostTags.Add(postTag);
+            }
+        }
     }
 }

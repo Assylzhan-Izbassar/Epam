@@ -8,5 +8,6 @@ namespace BLL.Interfaces
     public interface IPostTagRepository : IDisposable, IBaseRepository
     {
         IEnumerable<PostTag> GetPostTags();
+        void AddPostTag(PostTag postTag);
     }
 }

@@ -1,47 +1,60 @@
-﻿@using PL.Models;
-@model PostViewModel;
+﻿
+@using PL.Models;
+@model PostEditModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Add new post</h1>
+<h1>Create</h1>
+
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Tags" />
+            <input type="hidden" asp-for="@Model.Categories" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <input asp-for="ShortDescription" class="form-control" />
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <textarea style="height:200px" placeholder="Write here..." class="form-control"></textarea>
+                <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                @Html.DropDownList("Category", new SelectList(@ViewBag.Categories))
-                @*<select asp-for="Caterory" class="form-control" asp-items="@(new SelectList(@ViewBag.Categories,"Name"))"></select>*@
+                <select asp-for="@Model.Category.CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option value="@item.CategoryId">@item.Name</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <input type="checkbox" name="post" class="form-check-label" />
-                <label asp-for="Published">Have you publish it?</label>
+                <select asp-for="@Model.Tag.TagId" class="form-control" asp-items="ViewBag.CategoryId">
+                    @foreach (var item in Model.Tags)
+                    {
+                        <option value="@item.TagId">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Published" /> @Html.DisplayNameFor(model => model.Published)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+
     </div>
 </div>
-
-<div>
-    <a asp-action="Posts">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-

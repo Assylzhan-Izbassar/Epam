@@ -57,7 +57,7 @@ namespace BLL.Implementations
         public IEnumerable<Post> GetPosts(int pageNo, int pageSize)
         {
             var posts = _blogDbContext.Posts
-                .Include(p => p.Category)
+                .Include(c => c.Category)
                 .Where(p => p.Published)
                 .OrderByDescending(p => p.PostedOn)
                 .Take(pageSize)

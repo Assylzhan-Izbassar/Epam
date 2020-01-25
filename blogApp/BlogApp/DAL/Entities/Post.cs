@@ -13,6 +13,7 @@ namespace DAL.Entities
         public string ShortDescription { get; set; }
         public string Meta { get; set; }
         public bool Published { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime PostedOn { get; set; }
         public DateTime? Modified { get; set; }
         public Category Category { get; set; }

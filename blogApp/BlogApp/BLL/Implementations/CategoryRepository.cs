@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BLL.Implementations
 {
@@ -45,7 +46,7 @@ namespace BLL.Implementations
 
         public IEnumerable<Category> GetCategories()
         {
-            return _blogDbContext.Categories.ToList();
+            return _blogDbContext.Categories;
         }
 
         public Category GetCategoryById(int categoryId)
@@ -61,9 +62,9 @@ namespace BLL.Implementations
             }
         }
 
-        public void SaveCategory(Category category)
+        public async void SaveAsync()
         {
-            
+            await _blogDbContext.SaveChangesAsync();
         }
 
         public void Save()

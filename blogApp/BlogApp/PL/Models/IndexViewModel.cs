@@ -10,9 +10,11 @@ namespace PL.Models
         public IList<Post> Posts { get; set; }
         public IList<Tag> Tags { get; set; }
         public IEnumerable<PostTag> PostTags { get; set; }
+        public IList<Category> Categories { get; set; }
 
-        public Post Post { get; set; }
+        public PostViewModel Post { get; set; }
         public Tag Tag { get; set; }
+        public Category Category { get; set; }
         public PostTag PostTag { get; set; }
     }
 }

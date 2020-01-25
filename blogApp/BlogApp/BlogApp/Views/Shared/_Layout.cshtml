@@ -11,24 +11,27 @@
 <body>
     <div class="init">
         <div class="container">
-            <div class="init_inner">
-                <h1 class="init_title">The Post-Realism</h1>
+            <div>
+                <div class="init_inner">
+                    <h1 class="init_title">The Post-Realism</h1>
+                </div>
             </div>
             <header class="header">
                 <div class="container">
                     <!-- <div class="line"></div> -->
-                    <div class="header_inner">
+                    <div class="navbar-nav flex-grow-1">
                         <nav class="nav">
                             <a class="nav_link text-dark" asp-area="" asp-controller="Blog" asp-action="Posts">Home</a>
                             <a class="nav_link" href="#">Search</a>
                             <a class="nav_link" href="#">Archives</a>
                             <a class="nav_link" href="#">Contact</a>
                             <a class="nav_link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <a class="nav_link" asp-area="" asp-controller="User" asp-action="Index">Cabinet</a>
                                 <form method="post" asp-controller="Account" asp-action="Logout">
-                                    <button style="width:auto" type="submit" class="nav-link btn btn-link py-0">
+                                    <button style="width:auto" type="submit" class="nav_link btn btn-link text-dark btn_nav">
                                         Logout @User.Identity.Name
                                     </button>
                                 </form>
@@ -53,11 +56,12 @@
             </main>
         </div>
         <div class="sidebar">
-            @Html.Partial("_Search")
+            @await Html.PartialAsync("_Search")
+            @Html.ActionLink("Sidebars", "Sidebars", "Blog")
         </div>
     </div>
 
-    <footer class="footer">
+    <footer class="border-top footer text-muted">
         <div class="footer_inner">
             <div class="column init_column">
                 <h2 class="main_footer_title">

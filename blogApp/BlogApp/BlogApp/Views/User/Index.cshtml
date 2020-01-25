@@ -5,11 +5,12 @@
 
 @{
     ViewData["Title"] = "List of users";
-    Layout = "~/Views/Blog/_Layout.cshtml";
 }
 
 <a asp-action="Create" asp-controller="User">Create user</a>
+<a asp-action="Create" asp-controller="Blog">Create post</a>
 <a asp-action="Index" asp-controller="Roles">List of roles</a>
+<a asp-action="Index" asp-controller="Category">List of category</a>
 
 <table>
     <thead>

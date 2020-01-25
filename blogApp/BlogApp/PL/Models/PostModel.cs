@@ -19,5 +19,7 @@ namespace PL.Models
     {
         public int PostId { get; set; }
         public string UrlSlug { get; set; }
+        public IList<Category> Categories { get; set; }
+        public Tag Tag { get; set; }
     }
 }
