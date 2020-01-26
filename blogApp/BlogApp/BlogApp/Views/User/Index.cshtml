@@ -5,40 +5,40 @@
 
 @{
     ViewData["Title"] = "List of users";
+    Layout = null;
 }
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<p>
+    <a asp-action="Create" asp-controller="User">Create new</a>
+</p>
 
-<a asp-action="Create" asp-controller="User">Create user</a>
-<a asp-action="Create" asp-controller="Blog">Create post</a>
-<a asp-action="Index" asp-controller="Roles">List of roles</a>
-<a asp-action="Index" asp-controller="Category">List of category</a>
-
-<table>
-    <thead>
+<table class="table">
+    <thead class="thead-dark">
         <tr>
-            <th>
+            <th scope="col">
                 Email
             </th>
-            <th>
+            <th scope="col">
                 Birthdate
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelitem => item.Birthdate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-controller="User" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="ChangePassword" asp-controller="User" asp-route-id="@item.Id">Change password</a> |
-                <a asp-action="Delete" asp-controller="User" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td class = "font-weight-bolder text-uppercase">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class = "font-weight-bolder text-uppercase">
+                    @Html.DisplayFor(modelitem => item.Birthdate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="User" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="ChangePassword" asp-controller="User" asp-route-id="@item.Id">Change password</a> |
+                    <a asp-action="Delete" asp-controller="User" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

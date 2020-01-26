@@ -3,18 +3,21 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = null;
 }
 
-<h1>List of roles</h1>
-
+<p>
+    <a style="margin-right:10px;" asp-action="Create" asp-controller="Roles">Create new</a>
+    <a asp-action="UserList" asp-controller="Roles">List of users</a>
+</p>
 <table class="table">
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
         <tr>
             <td>@item.Name</td>
             <td>
                 <form method="post" asp-action="Delete" asp-controller="Roles" asp-route-id="@item.Id">
-                    <button  type="submit" class="btn btn-sm btn-danger">
+                    <button type="submit" class="btn btn-sm btn-danger">
                         Delete
                     </button>
                 </form>
@@ -22,7 +25,4 @@
         </tr>
     }
 </table>
-
-<a asp-action="Create" asp-controller="Roles">Create a role</a>
-<a asp-action="UserList" asp-controller="Roles">List of users</a>
 

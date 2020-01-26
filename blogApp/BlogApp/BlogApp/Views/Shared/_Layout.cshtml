@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BlogApp.App_Code;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,7 +30,7 @@
 
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a class="nav_link" asp-area="" asp-controller="User" asp-action="Index">Cabinet</a>
+                                <a class="nav_link" asp-area="" asp-controller="Blog" asp-action="Index">Cabinet</a>
                                 <form method="post" asp-controller="Account" asp-action="Logout">
                                     <button style="width:auto" type="submit" class="nav_link btn btn-link text-dark btn_nav">
                                         Logout @User.Identity.Name
@@ -57,7 +58,7 @@
         </div>
         <div class="sidebar">
             @await Html.PartialAsync("_Search")
-            @Html.ActionLink("Sidebars", "Sidebars", "Blog")
+            @Html.Action("Sidebars", "Blog")
         </div>
     </div>
 
@@ -79,10 +80,10 @@
             <div class="column">
                 <h3 class="footer_title">membership</h3>
                 <ul>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">Join</a>
                     </li>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">Success Stories</a>
                     </li>
                 </ul>
@@ -90,7 +91,7 @@
             <div class="column">
                 <h3 class="footer_title">Free Goodies</h3>
                 <ul>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">Blog</a>
                     </li>
                 </ul>
@@ -98,19 +99,19 @@
             <div class="column">
                 <h3 class="footer_title">The Post-Realism</h3>
                 <ul>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">About</a>
                     </li>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">Contact</a>
                     </li>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">Support</a>
                     </li>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">Privacy</a>
                     </li>
-                    <li>
+                    <li id="li_footer">
                         <a id="a_item" href="#">Terms</a>
                     </li>
                 </ul>

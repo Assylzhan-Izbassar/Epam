@@ -1,22 +1,22 @@
 ﻿@using DAL.Entities;
-@model List<Category>
+@model List<Tag>
 
 <div class="sidebar">
-    <h3>Categories</h3>
+    <h3>Tags</h3>
 
     @if (Model.Count > 0)
     {
         <ul>
-            @foreach (var category in Model)
+            @foreach (var tag in Model)
             {
                 <li>
-                    <a href="#">@category.Name</a>
+                    <a href="#">@tag.Name</a>
                 </li>
             }
         </ul>
     }
     else
     {
-        <p>No categories found!</p>
+        <p>No tags found!</p>
     }
 </div>

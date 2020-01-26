@@ -9,7 +9,9 @@ using DAL;
 using DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +40,11 @@ namespace BlogApp
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IPostTagRepository, PostTagRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddScoped<DataManager>();
+
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews();
         }

@@ -5,27 +5,26 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-
+<h1 class="mx-sm-5" style="margin-bottom:10px">Login</h1>
 
 <form method="post" asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl">
     <div asp-validation-summary="ModelOnly"></div>
-    <div>
+    <div class="form-group mx-sm-5">
         <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
+        <input class="form-control" asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
-    <div>
+    <div class="form-group mx-sm-5">
         <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
+        <input class="form-control" asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
-    <div>
-        <label asp-for="RememberMe"></label><br />
+    <div class="form-group form-check mx-sm-4" style="margin-left:20px">
         <input asp-for="RememberMe" />
+        <span >Remember me</span>
     </div>
     <div>
-        <input type="submit" value="Login" />
+        <input class="btn btn-primary mx-sm-5" type="submit" value="Login" />
     </div>
 </form>
 

@@ -7,7 +7,7 @@ namespace BLL.Interfaces
 {
     public interface ITagRepository : IDisposable, IBaseRepository
     {
-        IEnumerable<Tag> GetTags();
+        List<Tag> GetTags();
         Tag GetTagById(int tagId);
         void InsertTag(Tag tag);
         void UpdateTag(Tag tag);

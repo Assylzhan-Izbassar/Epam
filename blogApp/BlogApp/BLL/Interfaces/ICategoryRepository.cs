@@ -7,7 +7,7 @@ namespace BLL.Interfaces
 {
     public interface ICategoryRepository : IDisposable, IBaseRepository
     {
-        IEnumerable<Category> GetCategories();
+        List<Category> GetCategories();
         Category GetCategoryById(int categoryId);
         void InsertCategory(Category category);
         void UpdateCategory(Category category);

@@ -12,7 +12,7 @@ namespace PL.Models
         public IEnumerable<PostTag> PostTags { get; set; }
         public IList<Category> Categories { get; set; }
 
-        public PostViewModel Post { get; set; }
+        public Post Post { get; set; }
         public Tag Tag { get; set; }
         public Category Category { get; set; }
         public PostTag PostTag { get; set; }

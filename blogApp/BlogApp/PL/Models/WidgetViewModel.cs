@@ -9,10 +9,14 @@ namespace PL.Models
     public class WidgetViewModel
     {
         public IList<Category> Categories { get; private set; }
+        public IList<Tag> Tags { get; private set; }
+        public IList<Post> Posts { get; private set; }
 
         public WidgetViewModel(DataManager dataManager)
         {
-            Categories = (List<Category>)dataManager.Category.GetCategories();
+            Categories = dataManager.Category.GetCategories();
+            Tags = dataManager.Tag.GetTags();
+            Posts = dataManager.Post.GetPosts(0, 5);
         }
     }
 }

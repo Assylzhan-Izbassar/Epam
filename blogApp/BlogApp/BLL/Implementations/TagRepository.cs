@@ -48,7 +48,7 @@ namespace BLL.Implementations
             return _blogDbContext.Tags.Find(tagId);
         }
 
-        public IEnumerable<Tag> GetTags()
+        public List<Tag> GetTags()
         {
             return _blogDbContext.Tags.ToList();
         }

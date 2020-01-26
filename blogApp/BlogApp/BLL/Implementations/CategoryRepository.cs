@@ -44,9 +44,9 @@ namespace BLL.Implementations
             disposed = true;
         }
 
-        public IEnumerable<Category> GetCategories()
+        public List<Category> GetCategories()
         {
-            return _blogDbContext.Categories;
+            return _blogDbContext.Categories.ToList();
         }
 
         public Category GetCategoryById(int categoryId)

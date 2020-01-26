@@ -26,8 +26,7 @@ namespace BlogApp.Controllers
             return View(_roleManager.Roles.ToList());
         }
 
-        [HttpGet]
-        public ViewResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -42,7 +41,7 @@ namespace BlogApp.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "Blog");
                     }
                     else
                     {
@@ -68,7 +67,7 @@ namespace BlogApp.Controllers
             {
                 IdentityResult result = await _roleManager.DeleteAsync(role);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Blog");
         }
 
         public ViewResult UserList()

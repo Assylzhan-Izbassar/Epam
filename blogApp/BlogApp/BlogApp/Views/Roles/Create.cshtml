@@ -9,7 +9,11 @@
 <form asp-action="Create" asp-controller="Roles" method="post">
     <div class="form-group">
         <label for="name">New role</label>
-        <input name="name" class="form-control" />
+        <input name="roleName" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">Insert</button>
 </form>
+
+<div>
+    <a asp-action="Index" asp-controller="Blog">Back to List</a>
+</div>

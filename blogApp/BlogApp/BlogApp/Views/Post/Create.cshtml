@@ -1,0 +1,135 @@
+﻿@using PL.Models;
+@using DAL.Entities;
+@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<h1 class="mx-sm-5" style="margin-bottom:10px;">Create</h1>
+
+
+<div class="row">
+    <div class="col">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Tags" />
+            <input type="hidden" asp-for="@Model.Categories" />
+            <div class="form-group mx-sm-5">
+                <label asp-for="@Model.Post.Title" class="control-label"></label>
+                <input asp-for="@Model.Post.Title" class="form-control" />
+                <span asp-validation-for="@Model.Post.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-sm-5">
+                <label asp-for="@Model.Post.ShortDescription" class="control-label"></label>
+                <input asp-for="@Model.Post.ShortDescription" class="form-control" />
+                <span asp-validation-for="@Model.Post.ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-sm-5">
+                <label asp-for="@Model.Post.Description" class="control-label"></label>
+                <textarea asp-for="@Model.Post.Description" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="@Model.Post.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-sm-5">
+                <select asp-for="@Model.Category.CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option value="@item.CategoryId">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group mx-sm-5">
+                <select asp-for="@Model.Tag.TagId" class="form-control" asp-items="ViewBag.CategoryId">
+                    @foreach (var item in Model.Tags)
+                    {
+                        <option value="@item.TagId">@item.Name</option>
+                    }
+                </select><br />
+                <a href="#" class="btn btn-primary" role="button" onclick="AddTag(0)">Add a tag</a>
+            </div>
+            <div class="form-group mx-sm-5">
+                <label asp-for="@Model.Post.Meta" class="control-label"></label>
+                <input asp-for="@Model.Post.Meta" class="form-control" rows="10"/>
+                <span asp-validation-for="@Model.Post.Meta" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-sm-5">
+                <label asp-for="@Model.Post.UrlSlug" class="control-label"></label>
+                <input asp-for="@Model.Post.UrlSlug" class="form-control" rows="10"/>
+                <span asp-validation-for="@Model.Post.UrlSlug" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check mx-sm-5">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="@Model.Post.Published" /> @Html.DisplayNameFor(model => model.Post.Published)
+                </label>
+            </div>
+            <div class="form-group mx-sm-5">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@*Hidden, client side, adding tag *@
+<div class="modal fade" id="tag_model">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="dismit" data-dismiss="modal">&times;</a>
+                <h3 id="tag_title"></h3>
+            </div>
+            <div class="modal-body">
+                <form id="tag_form">
+                    <fieldset id="submit_form">
+                        <div class="form-group">
+                            <label class="control-label">Name</label>
+                            <input name="Name" class="form-control" id = "tag_name" placeholder = "Name" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <input name="Description" class="form-control" id="tag_description" placeholder="Discription" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">UrlSlug</label>
+                            <input name="UrlSlug" class="form-control" id="tag_urlslug" placeholder="UrlSlug" />
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block" id="saveData">Save</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a class="mx-sm-5" asp-action="Index" , asp-controller="Blog">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function AddTag(tagId) {
+            $("#tag_form")[0].reset();
+            $("#tag_title").html("Add New Tag");
+            $("#tag_model").modal();
+        }
+        $("#saveData").click(function () {
+            let data = $("#submit_form").serializeArray();
+
+            $.ajax({
+                type: "post",
+                url: "/Tag/SaveTag",
+                data: data,
+                success: function (request) {
+                    $("#tag_model").modal("hide");
+                    window.location.href = "/Post/Create";
+                }
+            });
+        });
+    </script>
+}
+

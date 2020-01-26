@@ -41,7 +41,8 @@ namespace DAL.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false)
+                    Discriminator = table.Column<string>(nullable: false),
+                    Birthdate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,9 +55,9 @@ namespace DAL.Migrations
                 {
                     CategoryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true),
-                    UrlSlug = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(maxLength: 20, nullable: false),
+                    UrlSlug = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,9 +70,9 @@ namespace DAL.Migrations
                 {
                     TagId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true),
-                    UrlSlug = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(maxLength: 40, nullable: false),
+                    UrlSlug = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -190,15 +191,14 @@ namespace DAL.Migrations
                 {
                     PostId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true),
-                    UrlSlug = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true),
-                    ShortDescription = table.Column<string>(nullable: true),
-                    Meta = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    ShortDescription = table.Column<string>(maxLength: 250, nullable: false),
+                    Description = table.Column<string>(maxLength: 5000, nullable: false),
+                    UrlSlug = table.Column<string>(maxLength: 150, nullable: false),
+                    Meta = table.Column<string>(maxLength: 25, nullable: false),
                     Published = table.Column<bool>(nullable: false),
                     PostedOn = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
-                    CategoryId1 = table.Column<int>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -210,16 +210,33 @@ namespace DAL.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Posts_Categories_CategoryId1",
-                        column: x => x.CategoryId1,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PostTag",
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PostId = table.Column<int>(nullable: false),
+                    Published = table.Column<DateTime>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    CommentBody = table.Column<string>(maxLength: 1000, nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comments_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PostTags",
                 columns: table => new
                 {
                     PostId = table.Column<int>(nullable: false),
@@ -227,19 +244,50 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PostTag", x => new { x.PostId, x.TagId });
+                    table.PrimaryKey("PK_PostTags", x => new { x.PostId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_PostTag_Posts_PostId",
+                        name: "FK_PostTags_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "PostId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PostTag_Tags_TagId",
+                        name: "FK_PostTags_Tags_TagId",
                         column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "TagId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Replies",
+                columns: table => new
+                {
+                    ReplyId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentId = table.Column<int>(nullable: false),
+                    PostId = table.Column<int>(nullable: true),
+                    ParentReplyId = table.Column<int>(nullable: true),
+                    Published = table.Column<DateTime>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    CommentBody = table.Column<string>(maxLength: 1000, nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PrimaryKey_BlogId", x => x.ReplyId);
+                    table.ForeignKey(
+                        name: "FK_Replies_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "CommentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Replies_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -282,19 +330,29 @@ namespace DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_PostId",
+                table: "Comments",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_CategoryId",
                 table: "Posts",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_CategoryId1",
-                table: "Posts",
-                column: "CategoryId1");
+                name: "IX_PostTags_TagId",
+                table: "PostTags",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostTag_TagId",
-                table: "PostTag",
-                column: "TagId");
+                name: "IX_Replies_CommentId",
+                table: "Replies",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Replies_PostId",
+                table: "Replies",
+                column: "PostId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -315,7 +373,10 @@ namespace DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "PostTag");
+                name: "PostTags");
+
+            migrationBuilder.DropTable(
+                name: "Replies");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -324,10 +385,13 @@ namespace DAL.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "Categories");

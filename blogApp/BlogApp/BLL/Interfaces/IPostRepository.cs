@@ -7,8 +7,8 @@ namespace BLL.Interfaces
 {
     public interface IPostRepository : IDisposable, IBaseRepository
     {
-        IEnumerable<Post> GetPosts();
-        IEnumerable<Post> GetPosts(int pageNo, int pageSize);
+        List<Post> GetPosts();
+        List<Post> GetPosts(int pageNo, int pageSize);
         Post GetPostById(int postId);
         void InsertPost(Post post);
         void UpdatePost(Post post);

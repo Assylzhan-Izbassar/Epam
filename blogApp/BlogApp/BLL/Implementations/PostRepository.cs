@@ -49,12 +49,12 @@ namespace BLL.Implementations
             return _blogDbContext.Posts.Find(postId);
         }
 
-        public IEnumerable<Post> GetPosts()
+        public List<Post> GetPosts()
         {
             return _blogDbContext.Posts.ToList();
         }
 
-        public IEnumerable<Post> GetPosts(int pageNo, int pageSize)
+        public List<Post> GetPosts(int pageNo, int pageSize)
         {
             var posts = _blogDbContext.Posts
                 .Include(c => c.Category)

@@ -5,7 +5,7 @@
     ViewData["Title"] = "UserList";
 }
 
-<h1>List of users</h1>
+<h1>Users</h1>
 
 <table class="table">
     @foreach(var item in Model)
@@ -18,4 +18,8 @@
         </tr>
     }
 </table>
+
+<div>
+    <a asp-action="Index", asp-controller="Blog">Back to List</a>
+</div>
 

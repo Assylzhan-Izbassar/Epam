@@ -1,0 +1,38 @@
+﻿@using BlogApp.App_Code;
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/style.css" />
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="#lessZeroTab" data-toggle="tab">Users</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#zeroTab" data-toggle="tab">Roles</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#firstTab" data-toggle="tab">Posts</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#secondTab" data-toggle="tab">Categories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#thirdTab" data-toggle="tab">Tags</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#fourthTab" data-toggle="tab">Comments</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div id="lessZeroTab" class="tab-pane fade in">@Html.Action("Index", "User")</div>
+    <div id="zeroTab" class="tab-pane fade in">@Html.Action("Index", "Roles")</div>
+    <div id="firstTab" class="tab-pane fade in">@Html.Action("Index", "Post")</div>
+    <div id="secondTab" class="tab-pane fade in">@Html.Action("Index", "Category")</div>
+    <div id="thirdTab" class="tab-pane fade in">@Html.Action("Index", "Tag")</div>
+    <div id="fourthTab" class="tab-pane fade in">@Html.Action("Index", "Comment")</div>
+</div>
+

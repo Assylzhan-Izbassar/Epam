@@ -4,38 +4,41 @@
 @{
     ViewData["Title"] = "Register";
 }
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-<h1>Register a new user</h1>
+<h1 class="mx-sm-5" style="margin-bottom:10px">Register a new user</h1>
 
 <form method="post" asp-action="Register" asp-controller="Account">
     <div asp-validation-summary="ModelOnly"></div>
-    <div>
+    <div class="form-group mx-sm-5">
         <label asp-for="Name"></label><br />
-        <input asp-for="Name" />
+        <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name"></span>
     </div>
-    <div>
+    <div class="form-group mx-sm-5">
         <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
+        <input class="form-control" asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
-    <div>
+    <div class="form-group mx-sm-5">
         <label asp-for="Birthday"></label><br />
-        <input asp-for="Birthday" />
+        <input class="form-control" asp-for="Birthday" />
         <span asp-validation-for="Birthday"></span>
     </div>
-    <div>
+    <div class="form-group mx-sm-5">
         <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
+        <input class="form-control" asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
-    <div>
+    <div class="form-group mx-sm-5">
         <label asp-for="ConfirmPassword"></label><br />
-        <input asp-for="ConfirmPassword" />
+        <input class="form-control" asp-for="ConfirmPassword" />
         <span asp-validation-for="ConfirmPassword"></span>
     </div>
     <div>
-        <input type="submit" value="Register" />
+        <input class="btn btn-primary mx-sm-5" type="submit" value="Register" />
     </div>
 </form>
 

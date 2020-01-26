@@ -16,6 +16,8 @@ namespace DAL
         public DbSet<PostTag> PostTags { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Reply> Replies { get; set; }
 
         public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
         {
@@ -34,6 +36,20 @@ namespace DAL
             modelBuilder.Entity<Post>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Posts);
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.Comments)
+                .WithOne(c => c.Post);
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.Replies)
+                .WithOne(r => r.Post);
+
+            modelBuilder.Entity<Comment>()
+                .HasMany(c => c.Replies)
+                .WithOne(r => r.Comment);
+
+            modelBuilder.Entity<Reply>()
+                .HasKey(b => b.ReplyId)
+                .HasName("PrimaryKey_BlogId");
 
             modelBuilder.Entity<PostTag>()
                 .HasKey(pt => new { pt.PostId, pt.TagId });
