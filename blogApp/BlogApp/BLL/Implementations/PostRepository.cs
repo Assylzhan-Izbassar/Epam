@@ -96,5 +96,46 @@ namespace BLL.Implementations
         {
             return _blogDbContext.Posts.Where(p => p.Published).Count();
         }
+
+        public List<Post> Search(string type, string item)
+        {
+            List<Post> posts = null;
+            List<int> tagIds = new List<int>();
+            switch (type)
+            {
+                case "Category":
+                    posts = _blogDbContext.Posts.Where(p => p.Category.Name.Contains(item) ||
+                        p.Category.Name.StartsWith(item) ||
+                        p.Category.Name.EndsWith(item)).ToList();
+                    break;
+
+                default:
+                    List<Tag> tags = _blogDbContext.Tags.ToList();
+                    List<PostTag> postTags = _blogDbContext.PostTags.ToList();
+
+                    foreach (var tag in tags)
+                    {
+                        if(tag.Name.Contains(item) || tag.Name.StartsWith(item))
+                        {
+                            tagIds.Add(tag.TagId);
+                        }
+                    }
+
+                    if(tagIds.Any())
+                    {
+                        posts = new List<Post>();
+                        foreach(var postTag in postTags)
+                        {
+                            if(tagIds.Contains(postTag.TagId) && !posts.Contains(GetPostById(postTag.PostId)))
+                            {
+                                posts.Add(GetPostById(postTag.PostId));
+                            }
+                        }
+                    }
+                        
+                    break;
+            }
+            return posts;
+        }
     }
 }

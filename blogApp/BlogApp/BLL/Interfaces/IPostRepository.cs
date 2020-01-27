@@ -9,6 +9,7 @@ namespace BLL.Interfaces
     {
         List<Post> GetPosts();
         List<Post> GetPosts(int pageNo, int pageSize);
+        List<Post> Search(string type, string item);
         Post GetPostById(int postId);
         void InsertPost(Post post);
         void UpdatePost(Post post);
