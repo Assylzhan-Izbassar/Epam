@@ -11,6 +11,7 @@ namespace PL.Models
         public IList<Tag> Tags { get; set; }
         public IEnumerable<PostTag> PostTags { get; set; }
         public IList<Category> Categories { get; set; }
+        public IList<Comment> Comments { get; set; }
 
         public Post Post { get; set; }
         public Tag Tag { get; set; }

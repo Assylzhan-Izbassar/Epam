@@ -1,0 +1,185 @@
+﻿@using DAL.Entities;
+@using PL.Models;
+
+@model IndexViewModel;
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <section class="section_header">
+        <h2 class="section_title">
+            @Html.DisplayFor(model => model.Post.Title)
+        </h2>
+        <div class="description">
+            <div class="description_inner">
+                <div class="section_category">
+                    <div style="width:auto">
+                        @Html.DisplayNameFor(model => model.Post.Category): @Html.DisplayFor(model => model.Post.Category.Name)
+                    </div>
+                </div>
+                <div class="section_tag">
+                    <div style="width:auto">
+                        @Html.DisplayNameFor(model => Model.Tag):
+                        <div>
+                            @foreach (var item in Model.PostTags)
+                            {
+                                @if (item.PostId == Model.Post.PostId)
+                                {
+                                    <div>@Model.Tags.FirstOrDefault(tag => tag.TagId == item.TagId).Name</div>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <h3 class="section_date">@Html.DisplayFor(model => model.Post.PostedOn)</h3>
+        </div>
+        <div class="section_text">
+            <p>
+                @Html.DisplayFor(model => model.Post.ShortDescription);
+            </p>
+            <p>
+                @Html.DisplayFor(model => model.Post.Description);
+            </p>
+        </div>
+    </section>
+</div>
+
+
+<div>
+    <a asp-action="Posts" asp-controller="Blog">Back to List</a>
+</div>
+<hr />
+
+<h3>Leave a comment</h3><br />
+
+<button id="generate" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Add Comment
+</button><br />
+
+@* Comment modal *@
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">New Comment</h5>
+                <div id="goodMessage">
+                    <div class="alert alert-success">
+                        <span class="text-body"></span>
+                        <strong>You succesfully created a new user!</strong>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <fieldset id="submit_form">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <input name="PostId" type="hidden" value="@Model.Post.PostId" />
+
+                    <div class="form-group mr-sm-5">
+                        <div id="notGoodMessage">
+                            <div class="alert alert-danger">
+                                <span class="text-body"></span>
+                                <strong>User name is invalid!</strong>
+                            </div>
+                        </div>
+                        <label class="control-label">Name</label>
+                        <input name="UserName" class="form-control" id="user_name" placeholder="Name" />
+                    </div>
+                    <div class="form-group mr-sm-5">
+                        <div id="notGoodMessageCmt">
+                            <div class="alert alert-danger">
+                                <span class="text-body"></span>
+                                <strong>Comment is invalid!</strong>
+                            </div>
+                        </div>
+                        <label class="control-label">Comment</label>
+                        <textarea name="CommentBody" class="form-control" id="comment" placeholder="Write here..." rows="5"></textarea>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id ="saveData"type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h3>Comments</h3>
+
+<form>
+    <div>
+        @foreach (var comment in Model.Comments)
+        {
+            @if (comment.Deleted == false)
+            {
+                <div>
+                    <h3>@comment.UserName</h3><br />
+                    <div>@comment.Published</div>
+                </div>
+                <p>
+                    @comment.CommentBody
+                </p>
+            }
+        }
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+
+         $('#generate').click(function() {
+            $('#notGoodMessage').hide();
+            $('#notGoodMessageCmt').hide();
+            $('#goodMessage').hide();
+         });
+         $("#saveData").click(function () {
+             let data = $("#submit_form").serializeArray();
+
+            let name = $("#user_name").val();
+             let comment = $("#comment").val();
+
+             if ((comment == "" || (comment.length < 5 && comment.length > 120))
+                && (name == "" || (name.length < 3 && name.length > 15))) {
+                $('#notGoodMessage').show();
+                $('#notGoodMessageCmt').show();
+                $('#goodMessage').hide();
+                return false;
+            }
+
+            if (name == "" || (name.length < 3 && name.length > 15)) {
+                $('#notGoodMessage').show();
+                $('#notGoodMessageCmt').hide();
+                $('#goodMessage').hide();
+                return false;
+            }
+            if (comment == "" || (comment.length < 5 && comment.length > 120)) {
+                $('#notGoodMessage').hide();
+                $('#notGoodMessageCmt').show();
+                $('#goodMessage').hide();
+                return false;
+             }
+             console.log(data);
+            $.ajax({
+                type: "post",
+                data: data,
+                url: "/Comment/SaveComment",
+                success: function (request) {
+                    //location.reload(true);
+                    $('#goodMessage').show();
+                    $('#notGoodMessage').hide();
+                    $('#notGoodMessageCmt').hide();
+                    $('#submit_form')[0].reset();
+                }
+            });
+        });
+    </script>
+}

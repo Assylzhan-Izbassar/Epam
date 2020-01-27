@@ -9,6 +9,7 @@ namespace BLL.Interfaces
     {
         List<Comment> GetComments();
         List<Reply> GetReplies(int commentId);
+        List<Comment> GetCommentByOrder();
         Comment GetCommentById(int commentId);
         void InsertComment(Comment comment);
         void UpdateComment(Comment comment);

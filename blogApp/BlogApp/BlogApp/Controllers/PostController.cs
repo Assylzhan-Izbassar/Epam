@@ -32,15 +32,13 @@ namespace BlogApp.Controllers
             List<Category> categories = _dataManager.Category.GetCategories().ToList();
             List<Tag> tags = _dataManager.Tag.GetTags().ToList();
 
-            ViewBag.Categories = new SelectList(categories, "Name", "Name");
-            ViewBag.Tags = new SelectList(tags, "Name", "Name");
+            ViewBag.Categories = categories;
+            ViewBag.Tags = tags;
 
-            var model = new IndexViewModel { Tags = tags, Categories = categories };
-
-            return View(model);
+            return View();
         }
         [HttpPost]
-        public ActionResult Create(IndexViewModel model)
+        public ActionResult Create(PostViewModel model)
         {
             try
             {
@@ -53,13 +51,13 @@ namespace BlogApp.Controllers
                         ShortDescription = model.Post.ShortDescription,
                         Meta = model.Post.Meta,
                         UrlSlug = model.Post.UrlSlug,
-                        Category = _dataManager.Category.GetCategoryById(model.Category.CategoryId)
+                        Category = _dataManager.Category.GetCategoryById(model.CategoryId)
                     };
 
                     PostTag postTag = new PostTag
                     {
                         Post = post,
-                        Tag = _dataManager.Tag.GetTagById(model.Tag.TagId)
+                        Tag = _dataManager.Tag.GetTagById(model.TagId)
 
                     };
 
@@ -86,6 +84,18 @@ namespace BlogApp.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             return View(model);
+        }
+
+        public ViewResult Details(int id)
+        {
+            Post post = _dataManager.Post.GetPostById(id);
+            List<Tag> tags = _dataManager.Tag.GetTags();
+            List<PostTag> posts = _dataManager.PostTag.GetPostTags().ToList();
+            List<Comment> comments = _dataManager.Comment.GetCommentByOrder().ToList();
+
+            IndexViewModel indexView = new IndexViewModel { Post = post, PostTags = posts , Tags = tags, Comments = comments};
+
+            return View(indexView);
         }
     }
 }

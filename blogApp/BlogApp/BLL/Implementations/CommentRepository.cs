@@ -21,9 +21,11 @@ namespace BLL.Implementations
         public void DeleteComment(int commentId)
         {
             Comment comment = GetCommentById(commentId);
+
             if(comment != null)
             {
-                _blogDbContext.Comments.Remove(comment);
+                comment.Deleted = true;
+                //_blogDbContext.Comments.Remove(comment);
             }
         }
 
@@ -50,6 +52,11 @@ namespace BLL.Implementations
         public List<Comment> GetComments()
         {
             return _blogDbContext.Comments.ToList();
+        }
+
+        public List<Comment> GetCommentByOrder()
+        {
+            return _blogDbContext.Comments.OrderByDescending(comment => comment.Published).ToList();
         }
 
         public void InsertComment(Comment comment)

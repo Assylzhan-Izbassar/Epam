@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Text;
 
 namespace DAL.Entities
@@ -16,7 +17,7 @@ namespace DAL.Entities
         [Display(Name = "Body")]
         [StringLength(1000, ErrorMessage = "The {0} must be between {2} and {1} characters long", MinimumLength = 25)]
         public string CommentBody { get; set; }
-
+        [DefaultValue(false)]
         public bool Deleted { get; set; }
 
         public Post Post { get; set; }
