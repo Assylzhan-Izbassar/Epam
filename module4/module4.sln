@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izh11DelegatesLambdasEvents
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izh15StreamsAndIO", "Izh15StreamsAndIO\Izh15StreamsAndIO.csproj", "{5BDA5DC1-E8C6-40C2-82AA-E1915BB122B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izh13IntroToLINQ", "Izh13IntroToLINQ\Izh13IntroToLINQ.csproj", "{03929681-F805-429E-816F-9A000DD0AC71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Izh12GenericsAndCollections", "Izh12GenericsAndCollections\Izh12GenericsAndCollections.csproj", "{01BC19FF-EB6E-496A-8DC5-EE6865EA2F2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{5BDA5DC1-E8C6-40C2-82AA-E1915BB122B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BDA5DC1-E8C6-40C2-82AA-E1915BB122B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BDA5DC1-E8C6-40C2-82AA-E1915BB122B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03929681-F805-429E-816F-9A000DD0AC71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03929681-F805-429E-816F-9A000DD0AC71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03929681-F805-429E-816F-9A000DD0AC71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03929681-F805-429E-816F-9A000DD0AC71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01BC19FF-EB6E-496A-8DC5-EE6865EA2F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01BC19FF-EB6E-496A-8DC5-EE6865EA2F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01BC19FF-EB6E-496A-8DC5-EE6865EA2F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01BC19FF-EB6E-496A-8DC5-EE6865EA2F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
