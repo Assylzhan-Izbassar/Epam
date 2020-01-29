@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Izh12GenericsAndCollections.BST;
 
 namespace Izh12GenericsAndCollections
 {
-    class Program
+    public class Book : IComparable<Book>
     {
-        static void Main(string[] args)
+        public int CompareTo(Book other)
         {
+            throw new NotImplementedException();
         }
     }
 }

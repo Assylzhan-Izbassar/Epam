@@ -6,17 +6,26 @@ using System.Threading.Tasks;
 
 namespace Izh12GenericsAndCollections.BST
 {
-    public class Node
+    public class Node<T> where T : IComparable
     {
-        public int Key { get; set; }
-        public Node Left { get; set; }
-        public Node Right { get; set; }
+        public T Key { get; set; }
+        public Node<T> Left { get; set; }
+        public Node<T> Right { get; set; }
 
-        public Node(int item)
+        public Node(T item)
         {
             Key = item;
             Left = Right = null;
         }
 
+        public override string ToString()
+        {
+            return "Key is equal to " + Key;
+        }
+
+        public int CompareTo(T other)
+        {
+            return other.CompareTo(Key);
+        }
     }
 }
