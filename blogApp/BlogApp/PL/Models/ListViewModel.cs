@@ -8,7 +8,7 @@ namespace PL.Models
 {
     public class ListViewModel
     {
-        public List<Post> Posts { get; private set; } 
+        public List<Post> Posts { get; set; } 
         public IndexViewModel Relation { get; set; }
         public int TotalPosts { get; private set; }
 

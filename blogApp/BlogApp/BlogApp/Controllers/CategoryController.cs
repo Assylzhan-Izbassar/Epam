@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BLL;
 using DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
+using PL.Models;
 
 namespace BlogApp.Controllers
 {
@@ -35,18 +36,56 @@ namespace BlogApp.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     _dataManager.Category.InsertCategory(category);
                     _dataManager.Category.Save();
-                    return RedirectToAction("Index", "Category");
+                    return RedirectToAction("Index", "Blog");
                 }
             }
-            catch(DataException)
+            catch (DataException)
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             return View(category);
+        }
+
+        [HttpPost]
+        public JsonResult SaveCategory(CategoryEditModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Category category = new Category
+                    {
+                        Name = model.Name,
+                        Description = model.Description,
+                        UrlSlug = model.UrlSlug
+                    };
+                    _dataManager.Category.InsertCategory(category);
+                    _dataManager.Category.Save();
+                    return Json(category);
+                }
+
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            return Json(false);
+        }
+
+        [HttpPost]
+        public JsonResult CategoryList()
+        {
+            var categories = from category in _dataManager.Category.GetCategories()
+                             select category;
+            if (categories != null)
+            {
+                return Json(categories);
+            }
+            return Json(false);
         }
     }
 }

@@ -115,5 +115,17 @@ namespace BlogApp.Controllers
             }
             return Json(false);
         }
+
+        [HttpPost]
+        public JsonResult TagList()
+        {
+            var tags = from tag in _dataManager.Tag.GetTags()
+                       select tag;
+            if(tags != null)
+            {
+                return Json(tags);
+            }
+            return Json(false);
+        }
     }
 }

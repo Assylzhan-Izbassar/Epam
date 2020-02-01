@@ -25,13 +25,19 @@ namespace BlogApp.Controllers
             return View();
         }
 
-        public ViewResult Posts(int p = 1)
+        public ViewResult Posts(string searchString, int p = 1)
         {
             var listViewModel = new ListViewModel(_dataManager, p);
 
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                var posts = listViewModel.Posts.Where(s => s.Category.Name.EndsWith(searchString));
+                listViewModel.Posts = posts.ToList();
+            }
+
             return View(listViewModel);
         }
-
+        
         public PartialViewResult Sidebars()
         {
             var widgetViewModel = new WidgetViewModel(_dataManager);

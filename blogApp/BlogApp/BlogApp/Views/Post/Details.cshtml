@@ -119,7 +119,7 @@
     <div>
         @foreach (var comment in Model.Comments)
         {
-            @if (comment.Deleted == false)
+            @if (comment.Deleted == false && Model.Post.PostId == comment.PostId)
             {
                 <div>
                     <h3>@comment.UserName</h3><br />

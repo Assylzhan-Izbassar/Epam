@@ -1,11 +1,12 @@
 ﻿@using System.Threading.Tasks;
 
-<div class="search">
+<form asp-controller="Blog" asp-action="Posts" class="search">
     <div class="search_box">
-        <input class="search_txt" type="text" placeholder="Type to search" />
-        <a class="search_btn" href="#">
+        <input class="search_txt" type="text" placeholder="Type to search" name="searchString"/>
+        <input type="submit" value="Filter"/>
+        @*<a class="search_btn" href="#">
             <i class="fas fa-search"></i>
-        </a>
+        </a>*@
     </div>
-</div>
+</form>
 
