@@ -25,7 +25,7 @@ namespace BLL.Implementations
             if(comment != null)
             {
                 comment.Deleted = true;
-                //_blogDbContext.Comments.Remove(comment);
+                _blogDbContext.Comments.Remove(comment);
             }
         }
 

@@ -249,9 +249,10 @@ ul.nav.nav-tabs{
 
 /* Description */
 .description {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
 }
 
 /* form */
@@ -373,5 +374,8 @@ ul {
     margin-left:15px;
 }
 
-
+/*Section for comment*/
+.comment_content{
+    margin-left:50px;
+}
 

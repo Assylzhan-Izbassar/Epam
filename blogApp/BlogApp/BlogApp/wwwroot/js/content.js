@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
+
     CallTagList();
     CallCategoryList();
+
+    $('#tags_selecter').multiselect();
 
     //event when press to "Add Tag" button
     $("#saveData").click(function () {

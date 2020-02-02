@@ -16,6 +16,7 @@ namespace PL.Models
         {
             Posts = dataManager.Post.GetPosts(page - 1, 10);
             TotalPosts = dataManager.Post.TotalPosts();
+
             Relation = new IndexViewModel();
             Relation.Posts = dataManager.Post.GetPosts();
             Relation.Tags = dataManager.Tag.GetTags();

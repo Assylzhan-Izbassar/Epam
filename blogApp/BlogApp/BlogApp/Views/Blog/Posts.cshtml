@@ -19,25 +19,21 @@
                     <div class="description_inner">
                         <div class="section_category">
                             <div>
-                                @Html.DisplayNameFor(model => item.Category):
-                            </div>
-                            <div>
-                                @Html.DisplayFor(model => item.Category.Name)
+                                <b>Category: </b>
+                                <a href ="#">@Html.DisplayFor(model => item.Category.Name)</a>
                             </div>
                         </div>
                         <div class="section_tag">
                             <div>
-                                @Html.DisplayNameFor(model => Model.Relation.Tag):
-                            </div>
-                            <div>
-                                @*Здесь будет прописыватся элементы тегов*@
+                                <b>Tag(s): </b>
+                                @*Распечатка тэгов*@
                                 @foreach (var tag in Model.Relation.Tags)
                                 {
                                     @foreach (var post in Model.Relation.PostTags)
                                     {
-                                        @if (tag.TagId == post.TagId)
+                                        @if (tag.TagId == post.TagId && post.PostId == item.PostId)
                                         {
-                                            <div>@tag.Name</div>
+                                            <a href ="#">@tag.Name </a> <span>|</span>
                                         }
                                     }
                                 }

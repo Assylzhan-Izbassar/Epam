@@ -54,14 +54,18 @@ namespace BlogApp.Controllers
                         Category = _dataManager.Category.GetCategoryById(model.CategoryId)
                     };
 
-                    PostTag postTag = new PostTag
+                    List<PostTag> postTags = new List<PostTag>();
+
+                    foreach(var postTag in model.TagIds)
                     {
-                        Post = post,
-                        Tag = _dataManager.Tag.GetTagById(model.TagId)
-
-                    };
-
-                    _dataManager.PostTag.AddPostTag(postTag);
+                        PostTag tag = new PostTag 
+                        { 
+                            Post = post, 
+                            Tag = _dataManager.Tag.GetTagById(postTag)
+                        };
+                        postTags.Add(tag);
+                        _dataManager.PostTag.AddPostTag(tag);
+                    }
 
                     if (model.Post.Published == true)
                     {
@@ -89,6 +93,7 @@ namespace BlogApp.Controllers
         public ViewResult Details(int id)
         {
             Post post = _dataManager.Post.GetPostById(id);
+
             List<Tag> tags = _dataManager.Tag.GetTags();
             List<PostTag> posts = _dataManager.PostTag.GetPostTags().ToList();
             List<Comment> comments = _dataManager.Comment.GetCommentByOrder().ToList();

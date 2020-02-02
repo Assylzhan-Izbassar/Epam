@@ -15,21 +15,22 @@
             <div class="description_inner">
                 <div class="section_category">
                     <div style="width:auto">
-                        @Html.DisplayNameFor(model => model.Post.Category): @Html.DisplayFor(model => model.Post.Category.Name)
+                        <b>Category: </b>
+                        <a href="#">@Html.DisplayFor(model => model.Post.Category.Name)</a>
                     </div>
                 </div>
                 <div class="section_tag">
                     <div style="width:auto">
-                        @Html.DisplayNameFor(model => Model.Tag):
-                        <div>
-                            @foreach (var item in Model.PostTags)
+                        <b>Tag(s): </b>
+
+                        @foreach (var item in Model.PostTags)
+                        {
+                            @if (item.PostId == Model.Post.PostId)
                             {
-                                @if (item.PostId == Model.Post.PostId)
-                                {
-                                    <div>@Model.Tags.FirstOrDefault(tag => tag.TagId == item.TagId).Name</div>
-                                }
+                                <a href ="#">@Model.Tags.FirstOrDefault(tag => tag.TagId == item.TagId).Name </a>
+                                <span> | </span>
                             }
-                        </div>
+                        }
                     </div>
 
                 </div>
@@ -55,13 +56,13 @@
 
 <h3>Leave a comment</h3><br />
 
-<button id="generate" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+<button id="generate" type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment_modal">
     Add Comment
 </button><br />
 
 @* Comment modal *@
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="comment_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -69,7 +70,7 @@
                 <div id="goodMessage">
                     <div class="alert alert-success">
                         <span class="text-body"></span>
-                        <strong>You succesfully created a new user!</strong>
+                        <strong>Comment is succesfully saved!</strong>
                     </div>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -113,7 +114,7 @@
 
 <hr />
 
-<h3>Comments</h3>
+<h3 style="margin:16px 0 16px 0;">Comments</h3>
 
 <form>
     <div>
@@ -121,13 +122,15 @@
         {
             @if (comment.Deleted == false && Model.Post.PostId == comment.PostId)
             {
-                <div>
-                    <h3>@comment.UserName</h3><br />
-                    <div>@comment.Published</div>
+                <div class="comment_content">
+                    <div>
+                        <b>@comment.UserName</b>
+                        <span>@comment.Published</span>
+                    </div>
+                    <p>
+                        @comment.CommentBody
+                    </p>
                 </div>
-                <p>
-                    @comment.CommentBody
-                </p>
             }
         }
     </div>
@@ -143,8 +146,7 @@
          });
          $("#saveData").click(function () {
              let data = $("#submit_form").serializeArray();
-
-            let name = $("#user_name").val();
+             let name = $("#user_name").val();
              let comment = $("#comment").val();
 
              if ((comment == "" || (comment.length < 5 && comment.length > 120))
@@ -173,11 +175,14 @@
                 data: data,
                 url: "/Comment/SaveComment",
                 success: function (request) {
-                    //location.reload(true);
-                    $('#goodMessage').show();
-                    $('#notGoodMessage').hide();
+                $('#notGoodMessage').hide();
                     $('#notGoodMessageCmt').hide();
-                    $('#submit_form')[0].reset();
+                    $('#goodMessage').show();
+                    var millisecondsToWait = 1000;
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, millisecondsToWait);
+                    
                 }
             });
         });

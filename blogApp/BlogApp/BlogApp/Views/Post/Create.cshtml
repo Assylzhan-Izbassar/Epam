@@ -8,6 +8,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 <h1 class="mx-sm-5" style="margin-bottom:10px;">Create</h1>
 
 
@@ -34,14 +35,16 @@
                 <label class="control-label">Category</label>
                 <select class="select_form" asp-for="CategoryId" id="categories_selecter"></select>
                 <div class="input-group-append">
-                    <a href="#addCategory" class="btn btn-primary" role="button" onclick="AddCategory(0)">Add a category</a>
+                    <a href="#addCategory" class="btn btn-primary " role="button" onclick="AddCategory(0)">Add a category</a>
                 </div>
             </div>
             <div class="input-group mx-sm-5">
-                <label class="control-label">Tag</label><br />
-                <select class="select_form" asp-for="TagId" id="tags_selecter"></select>
+                <label class="control-label">Tag</label>
+                <select class="form-control" multiple asp-for="TagIds" id="tags_selecter">
+                    <option value="" disabled selected>Choose your country</option>
+                </select>
                 <div class="input-group-append">
-                    <a href="#addTag" class="btn btn-primary" role="button" onclick="AddTag(0)">Add a tag</a>
+                    <a href="#addTag" class="btn btn-primary input-group-text" role="button" onclick="AddTag(0)">Add a tag</a>
                 </div>
             </div>
             <div class="form-group mx-sm-5">

@@ -8,6 +8,7 @@ using BLL;
 using DAL.Entities;
 using PL.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text;
 
 namespace BlogApp.Controllers
 {
@@ -28,20 +29,59 @@ namespace BlogApp.Controllers
         public ViewResult Posts(string searchString, int p = 1)
         {
             var listViewModel = new ListViewModel(_dataManager, p);
+            StringBuilder st = new StringBuilder();
 
-            if(!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                var posts = listViewModel.Posts.Where(s => s.Category.Name.EndsWith(searchString));
+                var posts = new List<Post>();
+                foreach (var post in listViewModel.Posts)
+                {
+                    st.Append(post.Category.Name); st.Append("#"); st.Append(searchString);
+                    string temp = st.ToString();
+                    st.Clear();
+
+                    List<int> pi = KMPSearch(temp);
+
+                    for (int i = 0; i < pi.Count; ++i)
+                    {
+                        if (pi[i] == searchString.Length)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                }
                 listViewModel.Posts = posts.ToList();
             }
 
             return View(listViewModel);
         }
-        
+
         public PartialViewResult Sidebars()
         {
             var widgetViewModel = new WidgetViewModel(_dataManager);
             return PartialView("_Sidebars", widgetViewModel);
+        }
+
+
+        private List<int> KMPSearch(string s)
+        {
+            int n = s.Length;
+            List<int> prefixFunction = new List<int>();
+            for (int i = 0; i < n; ++i)
+            {
+                prefixFunction.Add(0);
+            }
+            for (int i = 1; i < n; ++i)
+            {
+                int j = prefixFunction[i - 1];
+                while (j > 0 && s[i] != s[j])
+                {
+                    j = prefixFunction[j - 1];
+                }
+                if (s[i] == s[j]) ++j;
+                prefixFunction[i] = j;
+            }
+            return prefixFunction;
         }
     }
 }
