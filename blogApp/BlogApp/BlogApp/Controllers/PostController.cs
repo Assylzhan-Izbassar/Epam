@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL;
 using DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PL.Models;
@@ -26,7 +27,7 @@ namespace BlogApp.Controllers
                         select post;
             return View(posts);
         }
-
+        [Authorize(Roles = "admin, moderator")]
         public IActionResult Create()
         {
             List<Category> categories = _dataManager.Category.GetCategories().ToList();
@@ -38,6 +39,7 @@ namespace BlogApp.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult Create(PostViewModel model)
         {
             try

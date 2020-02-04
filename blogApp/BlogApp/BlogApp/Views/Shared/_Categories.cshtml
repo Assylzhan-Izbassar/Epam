@@ -10,7 +10,7 @@
             @foreach (var category in Model)
             {
                 <li>
-                    <a href="#">@category.Name</a>
+                    <a asp-controller="Blog" asp-action="Posts" asp-route-searchString="@category.Name">@category.Name</a>
                 </li>
             }
         </ul>

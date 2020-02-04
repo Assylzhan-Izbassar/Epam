@@ -20,6 +20,6 @@ namespace DAL.Entities
         [Display(Name = "Url slug")]
         public string UrlSlug { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

@@ -4,12 +4,14 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PL.Models;
 
 namespace BlogApp.Controllers
 {
+    [Authorize(Roles = "admin, moderator")]
     public class RolesController : Controller
     {
         RoleManager<Role> _roleManager;

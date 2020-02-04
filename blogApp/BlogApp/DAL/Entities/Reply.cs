@@ -23,7 +23,7 @@ namespace DAL.Entities
 
         public bool Deleted { get; set; }
 
-        public Post Post { get; set; }
-        public Comment Comment { get; set; }
+        public virtual Post Post { get; set; }
+        public virtual Comment Comment { get; set; }
     }
 }

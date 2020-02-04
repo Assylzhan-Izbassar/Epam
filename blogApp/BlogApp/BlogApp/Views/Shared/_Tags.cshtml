@@ -10,7 +10,9 @@
             @foreach (var tag in Model)
             {
                 <li>
-                    <a href="#">@tag.Name</a>
+                    <a asp-controller="Blog", asp-action="Posts"
+                       asp-route-searchString ="@tag.Name"
+                       asp-route-searchOption="Tag">@tag.Name</a>
                 </li>
             }
         </ul>

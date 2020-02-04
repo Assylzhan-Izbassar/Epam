@@ -1,12 +1,14 @@
 ﻿@using System.Threading.Tasks;
 
 <form asp-controller="Blog" asp-action="Posts" class="search">
+    <div>
+        @Html.DropDownList("searchOption", new SelectList(Enum.GetValues(typeof(Options))), "Select search option",
+            new { @class = "form-control"})
+    </div>
     <div class="search_box">
-        <input class="search_txt" type="text" placeholder="Type to search" name="searchString"/>
-        <input type="submit" value="Filter"/>
-        @*<a class="search_btn" href="#">
+        <input class="search_txt" type="text" placeholder="Type to search" name="searchString" />
+        <a class="search_btn" href="#search" onclick="$('.search').submit()">
             <i class="fas fa-search"></i>
-        </a>*@
+        </a>
     </div>
 </form>
-

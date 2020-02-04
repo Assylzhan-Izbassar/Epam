@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BlogApp.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, moderator")]
     public class UserController : Controller
     {
         UserManager<User> _userManager;

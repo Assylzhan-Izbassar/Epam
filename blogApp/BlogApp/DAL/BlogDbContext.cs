@@ -27,6 +27,7 @@ namespace DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server = .\SQLEXPRESS; Database = blog.object; Trusted_Connection = True;");
+            optionsBuilder.UseLazyLoadingProxies();
 
             base.OnConfiguring(optionsBuilder);
         }

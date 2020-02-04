@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL;
 using DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PL.Models;
 
@@ -25,7 +26,7 @@ namespace BlogApp.Controllers
                        select tag;
             return View(tags);
         }
-
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult Delete(int id, bool? saveChangesError)
         {
             if (saveChangesError.GetValueOrDefault())
@@ -38,6 +39,7 @@ namespace BlogApp.Controllers
             return View(tag);
         }
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult DeleteConfirmed(int id)
         {
             try
@@ -52,11 +54,13 @@ namespace BlogApp.Controllers
             return RedirectToAction("Index","Blog");
         }
 
+        [Authorize(Roles = "admin, moderator")]
         public ViewResult Create()
         {
             return View(new TagViewModel());
         }
         [HttpPost]
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult Create(TagViewModel model)
         {
             try
@@ -87,26 +91,29 @@ namespace BlogApp.Controllers
         {
             try
             {
-                if (model.TagId > 0)
+                if(isValid(model) && ModelState.IsValid)
                 {
-                    Tag tag = _dataManager.Tag.GetTags().ToList().SingleOrDefault(x => x.TagId == model.TagId);
-                    tag.Name = model.Name;
-                    tag.Description = model.Description;
-                    tag.UrlSlug = model.UrlSlug;
-                    _dataManager.Tag.Save();
-                    return Json(tag);
-                }
-                else
-                {
-                    Tag tag = new Tag
+                    if (model.TagId > 0)
                     {
-                        Name = model.Name,
-                        Description = model.Description,
-                        UrlSlug = model.UrlSlug
-                    };
-                    _dataManager.Tag.InsertTag(tag);
-                    _dataManager.Tag.Save();
-                    return Json(tag);
+                        Tag tag = _dataManager.Tag.GetTags().ToList().SingleOrDefault(x => x.TagId == model.TagId);
+                        tag.Name = model.Name;
+                        tag.Description = model.Description;
+                        tag.UrlSlug = model.UrlSlug;
+                        _dataManager.Tag.Save();
+                        return Json(tag);
+                    }
+                    else
+                    {
+                        Tag tag = new Tag
+                        {
+                            Name = model.Name,
+                            Description = model.Description,
+                            UrlSlug = model.UrlSlug
+                        };
+                        _dataManager.Tag.InsertTag(tag);
+                        _dataManager.Tag.Save();
+                        return Json(tag);
+                    }
                 }
             }
             catch (DataException)
@@ -126,6 +133,23 @@ namespace BlogApp.Controllers
                 return Json(tags);
             }
             return Json(false);
+        }
+
+        private bool isValid(TagEditModel tag)
+        {
+            if (tag.Name == null || (tag.Name.Length < 4 && tag.Name.Length > 15))
+            {
+                return false;
+            }
+            if(tag.Description == null || (tag.Description.Length < 5 && tag.Description.Length > 40))
+            {
+                return false;
+            }
+            if(tag.UrlSlug == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

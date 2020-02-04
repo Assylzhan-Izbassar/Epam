@@ -25,7 +25,7 @@ namespace BlogApp.Controllers
                            select comment;
             return View(comments);
         }
-
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult Delete(int id, bool? saveChangesError)
         {
             if (saveChangesError.GetValueOrDefault())
@@ -39,7 +39,7 @@ namespace BlogApp.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult DeleteConfirmed(int id)
         {
             try
@@ -90,7 +90,7 @@ namespace BlogApp.Controllers
             return Json(false);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult Edit(int id)
         {
             Comment comment = _dataManager.Comment.GetCommentById(id);
@@ -98,7 +98,7 @@ namespace BlogApp.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, moderator")]
         public ActionResult Edit(Comment model)
         {
             Comment comment = null;

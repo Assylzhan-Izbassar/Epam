@@ -41,7 +41,7 @@ namespace DAL.Entities
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Modified { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Reply> Replies { get; set; }
         public virtual ICollection<PostTag> PostTags { get; set; }

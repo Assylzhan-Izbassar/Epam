@@ -20,7 +20,7 @@ namespace DAL.Entities
         [DefaultValue(false)]
         public bool Deleted { get; set; }
 
-        public Post Post { get; set; }
+        public virtual Post Post { get; set; }
         public virtual ICollection<Reply> Replies { get; set; }
     }
 }

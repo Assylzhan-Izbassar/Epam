@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL;
 using DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PL.Models;
 
 namespace BlogApp.Controllers
 {
+    [Authorize(Roles ="admin, moderator")]
     public class CategoryController : Controller
     {
         private readonly DataManager _dataManager;
